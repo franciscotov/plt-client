@@ -1,11 +1,11 @@
+import { validateSession } from "@/utils/utils";
 import axios from "axios";
-// import { clearLocalStorage, validateSession } from "../utils/sessionUtils";
 
 export const api = axios.create();
 // Request interceptor
 api.interceptors.request.use(
   async (config) => {
-    // validateSession();
+    validateSession();
     return config;
   },
   (error) => {
@@ -25,7 +25,7 @@ api.interceptors.response.use(
         error.response.data.key === "JWT_EXPIRED")
     ) {
       // clearLocalStorage();
-      window.location.href = "/test";
+      window.location.href = "/login";
     }
     return { error, data: "error" };
   }

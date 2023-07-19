@@ -1,3 +1,4 @@
+import { UserBase } from "@/utils/interfaces/interfaces";
 import { api } from "./interceptors";
 const API_AIR_URL = "http://localhost:3001/";
 
@@ -12,7 +13,7 @@ const API_AIR_URL = "http://localhost:3001/";
 //   };
 // };
 
-export const loginUser = async (email: string, password: string) => {
+export const loginUser: UserBase | any = async (email: string, password: string) => {
   const options = {
     headers: {
       email,
@@ -21,7 +22,7 @@ export const loginUser = async (email: string, password: string) => {
     },
   };
   try {
-    let response = await api.get(`${API_AIR_URL}user/login`, options);
+    let response = await api.get<UserBase | any>(`${API_AIR_URL}user/login`, options);
     return response;
   } catch (e) {
     console.error(e, "errorsssss");

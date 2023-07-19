@@ -1,6 +1,6 @@
 export const formConst = {
-    login: {
-        email: 'email',
-        password: 'password'
-    }
-} 
+  login: {
+    email: "email",
+    password: "password",
+  },
+};

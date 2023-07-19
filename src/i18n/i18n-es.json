@@ -2,6 +2,13 @@
     "emailLabel": "Usuario o correo electrónico",
     "emailHelperText": "Usuario o correo electrónico es requerido",
     "passwordLabel": "Contraseña",
-    "passwordHelperText": "La contraseña es requerida"
+    "passwordHelperText": "La contraseña es requerida",
+    "errorTitle": "Error",
+    "errorMsgLogin": "Error al intentar acceder",
+    "msgSuccessLogin": "Te redireccionaremos al dashboard",
+    "titleSuccessLogin": "Redireccionando",
+    "send": "Enviar",
+    "titleSuccessLogin": "Redireccionando"
+
 
 }

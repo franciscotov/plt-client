@@ -1,3 +1,4 @@
+import { Day, GameAttributes } from "@/utils/interfaces/interfaces";
 import { CSSProperties } from "react";
 
 export const containerStyles: CSSProperties = {
@@ -16,4 +17,14 @@ export const containerLoginStyles: CSSProperties = {
   position: "relative",
   padding: "1rem",
   minHeight: "70vh",
+};
+
+export const game: GameAttributes = {
+  name: "name",
+  type: 5,
+  date: 1,
+  initHour: 20,
+  endHour: 21,
+  campusId: 1,
+  day: Day.Lunes
 };
