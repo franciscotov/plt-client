@@ -1,0 +1,50 @@
+// @import '../../../sass/variables';
+// botones secundarios, otros colores, etc
+$primary-button-color: #002FC5;
+$primary-button-color-disabled: #6a8af3;
+$primary-text-button-color: #ffffff;
+.button {
+  padding: 4px 10px !important;
+  border-radius: 4px !important;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 22px;
+  /* identical to box height, or 169% */
+
+  letter-spacing: 0.46px;
+  text-transform: uppercase;
+}
+
+.primary {
+  background-color: $primary-button-color !important;
+  color: $primary-text-button-color !important;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12);
+}
+
+.primary:hover {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    $primary-button-color;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12);
+}
+
+.secondary {
+  background-color: $primary-text-button-color !important;
+  color: $primary-button-color !important;
+}
+
+.secondary:hover {
+  background: rgba(63, 81, 181, 0.08) !important;
+  box-shadow: 1px solid rgba(0, 47, 197, 0.5);
+  box-sizing: border-box;
+}
+
+.disabled {
+  background-color: $primary-button-color-disabled !important;
+  color: $primary-text-button-color !important;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12);
+}

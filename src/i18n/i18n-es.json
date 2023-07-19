@@ -1,0 +1,7 @@
+{
+    "emailLabel": "Usuario o correo electrónico",
+    "emailHelperText": "Usuario o correo electrónico es requerido",
+    "passwordLabel": "Contraseña",
+    "passwordHelperText": "La contraseña es requerida"
+
+}
