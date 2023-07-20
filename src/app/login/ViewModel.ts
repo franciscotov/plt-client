@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { loginUser } from "@/services/loginService";
+import { loginUser } from "@/services/userService";
 import useAlert from "@/components/moleculesComponents/alert/AlertComponent";
 import { useRouter } from "next/navigation";
 import i18n from "@/i18n/i18n-es.json";
 import routes from "@/routes/routes";
-import { setLogin, validateSession } from "@/utils/utils";
+import { setLogin } from "@/utils/utils";
 import { UserBase } from "@/utils/interfaces/interfaces";
 
 const ViewModel = () => {

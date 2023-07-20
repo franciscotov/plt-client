@@ -1,6 +1,6 @@
 "use client";
-import Password from "@/components/Global/password";
-import Text from "@/components/Global/text";
+import Password from "@/components/atomComponents/Input/password";
+import Text from "@/components/atomComponents/Input/text";
 import MaterialButton from "@/components/atomComponents/Buttons";
 import { Grid } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
@@ -22,54 +22,26 @@ const Login = () => {
       <div style={containerStyles}>
         <div style={containerLoginStyles}>
           <Grid container spacing={4}>
-            <Grid item xs={12} md={12}>
-              <Controller
-                name={login.email}
+            <Grid item xs={12} md={6}>
+              <Text
+                id={login.email}
+                label={i18n.emailLabel}
+                required={true}
+                fullWidth={true}
+                readOnly={false}
                 control={control}
-                defaultValue={""}
-                render={({
-                  field: { onChange, value },
-                  fieldState: { error },
-                }) => (
-                  <Text
-                    id={login.email}
-                    label={i18n.emailLabel}
-                    value={value}
-                    onChange={onChange}
-                    error={error}
-                    required={true}
-                    fullWidth={true}
-                    readOnly={false}
-                  />
-                )}
-                rules={{
-                  required: i18n.emailHelperText,
-                }}
+                helperText={i18n.emailHelperText}
               />
             </Grid>
             <Grid item xs={12} md={12}>
-              <Controller
-                name={login.password}
+              <Password
+                id={login.password}
+                label={i18n.passwordLabel}
                 control={control}
-                defaultValue={""}
-                render={({
-                  field: { onChange, value },
-                  fieldState: { error },
-                }) => (
-                  <Password
-                    id={login.password}
-                    label={i18n.passwordLabel}
-                    value={value}
-                    onChange={onChange}
-                    error={error}
-                    required={true}
-                    fullWidth={true}
-                    readOnly={false}
-                  />
-                )}
-                rules={{
-                  required: i18n.passwordHelperText,
-                }}
+                required={true}
+                fullWidth={true}
+                readOnly={false}
+                helperText={i18n.passwordHelperText}
               />
             </Grid>
             <Grid item xs={12} md={12}>

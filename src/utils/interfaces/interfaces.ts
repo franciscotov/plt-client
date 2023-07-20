@@ -44,5 +44,15 @@ export enum Day {
   Jueves = "jueves",
   Viernes = "viernes",
   Sabado = "sabado",
-  domingo = "domingo",
+  Domingo = "domingo",
+}
+
+export interface WeekDays {
+  label: string;
+  value: string;
+}
+
+export interface CampusIds {
+  label: string;
+  value: number;
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Controller, Control, FieldValues } from 'react-hook-form'
-import TextField from '../Global/text'
+import TextField from '../atomComponents/Input/text'
 
 import { validateEmail } from './../../util/validations'
 

@@ -8,7 +8,30 @@
     "msgSuccessLogin": "Te redireccionaremos al dashboard",
     "titleSuccessLogin": "Redireccionando",
     "send": "Enviar",
-    "titleSuccessLogin": "Redireccionando"
-
+    "createGame": "Crear partido",
+    "gameNameHelperText": "Nombre del partido es requerido",
+    "initHourHelperText": "Hora de inicio es requerida",
+    "endHourHelperText": "Hora de fin es requerida",
+    "endHour": "Hora de fin",
+    "initHour": "Hora de inicio",
+    "gameName": "Nombre del partido",
+    "helperTextNumberWithManyDecimals": "El valor ingresado tiene muchos decimales",
+    "helperTextGreaterThanAllowed": "El valor ingresado mayor a lo permitido",
+    "helperTextLessThanAllowed": "El valor es menor a lo permitido",
+    "helperTextNoTaNumber": "El valor ingresado no es un número",
+    "placeholderDefaultEnter": "Ingresa",
+    "commonLabel": "Selecciona",
+    "commonLabelNoOptions" : "No hay opciones",
+    "labelCampus": "Sede",
+    "placeholderCampus": "Selecciona sede",
+    "campusIdHelperText": "Día es requerido",
+    "labelDay": "Día",
+    "placeholderDay": "Selecciona día",
+    "dayHelperText": "Día es requerido",
+    "playersQuantity": "Cantidad de jugadores",
+    "playersQuantityHelperText": "Cantidad de jugadores es requerida",
+    "titleSuccessCreateGame": "Juego creado",
+    "msgSuccessCreateGame": "Juego creado te redireccionaremos",
+    "errorMsgCreateGame": "No se puedo crear el juego"
 
 }
