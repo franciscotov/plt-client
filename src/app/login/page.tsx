@@ -1,7 +1,7 @@
 "use client";
-import Password from "@/components/atomComponents/Input/password";
-import Text from "@/components/atomComponents/Input/text";
-import MaterialButton from "@/components/atomComponents/Buttons";
+import Password from "@/components/atom/Input/password";
+import Text from "@/components/atom/Input/text";
+import MaterialButton from "@/components/atom/Buttons";
 import { Grid } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { containerLoginStyles, containerStyles } from "./contants";

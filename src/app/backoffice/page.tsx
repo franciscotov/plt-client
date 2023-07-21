@@ -1,14 +1,14 @@
 "use client";
-import Text from "@/components/atomComponents/Input/text";
-import MaterialButton from "@/components/atomComponents/Buttons";
+import Text from "@/components/atom/Input/text";
+import MaterialButton from "@/components/atom/Buttons";
 import { Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { containerLoginStyles, containerStyles } from "./contants";
 import ViewModel from "./ViewModel";
 import { formConst } from "@/constants";
 import i18n from "@/i18n/i18n-es.json";
-import InputStepper from "@/components/atomComponents/Input/InputStepper";
-import Select from "@/components/atomComponents/selects/select";
+import InputStepper from "@/components/atom/Input/InputStepper";
+import Select from "@/components/atom/selects/select";
 import { campusIds, weekDays } from "@/utils/utils";
 
 const Backoffice = () => {
