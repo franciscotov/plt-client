@@ -1,6 +1,6 @@
 import React from "react";
-import { Control, Controller, FieldError } from "react-hook-form";
-import { TextField } from "@mui/material";
+import { Control, Controller } from "react-hook-form";
+import { Grid, TextField } from "@mui/material";
 import { useStyles } from "../../../styles/Global";
 
 interface TextProps {
@@ -11,43 +11,47 @@ interface TextProps {
   readOnly: boolean;
   control: Control;
   helperText: string;
+  xs: number;
+  md: number;
 }
 
 export default function Text(props: TextProps): JSX.Element {
   const classes = useStyles();
-  const { control, id, helperText, label, required, fullWidth, readOnly } =
+  const { control, id, helperText, label, required, fullWidth, readOnly, xs, md } =
     props;
 
   return (
-    <Controller
-      name={id}
-      control={control}
-      defaultValue={""}
-      render={({ field: { onChange, value }, fieldState: { error } }) => (
-        <TextField
-          id={id}
-          label={label}
-          variant="outlined"
-          value={value}
-          onChange={onChange}
-          error={!!error}
-          helperText={error ? error.message : null}
-          required={required}
-          fullWidth={fullWidth}
-          InputLabelProps={{
-            shrink: true,
-            classes: {
-              asterisk: classes.asterikColor.color,
-            },
-          }}
-          InputProps={{
-            readOnly: readOnly,
-          }}
-        />
-      )}
-      rules={{
-        required: helperText,
-      }}
-    />
+    <Grid item xs={12} md={12}>
+      <Controller
+        name={id}
+        control={control}
+        defaultValue={""}
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <TextField
+            id={id}
+            label={label}
+            variant="outlined"
+            value={value}
+            onChange={onChange}
+            error={!!error}
+            helperText={error ? error.message : null}
+            required={required}
+            fullWidth={fullWidth}
+            InputLabelProps={{
+              shrink: true,
+              classes: {
+                asterisk: classes.asterikColor.color,
+              },
+            }}
+            InputProps={{
+              readOnly: readOnly,
+            }}
+          />
+        )}
+        rules={{
+          required: helperText,
+        }}
+      />
+    </Grid>
   );
 }

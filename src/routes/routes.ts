@@ -3,6 +3,8 @@ const routes = {
   login: "/login",
   changePassword: "/change-password",
   dashboard: "/dashboard",
+  createGame: "/backoffice/create-game",
+  createCampus: "/backoffice/create-campus",
 };
 
 export default routes;

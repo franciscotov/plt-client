@@ -1,54 +1,54 @@
 "use client";
-import Password from "@/components/atom/Input/Password";
 import Text from "@/components/atom/Input/Text";
 import MaterialButton from "@/components/atom/Buttons";
 import { Grid } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { containerLoginStyles, containerStyles } from "./contants";
 import ViewModel from "./ViewModel";
 import { formConst } from "@/constants";
 import i18n from "@/i18n/i18n-es.json";
+import InputStepper from "@/components/atom/Input/InputStepper";
+import Select from "@/components/atom/selects/select";
+import { campusIds, weekDays } from "@/utils/utils";
+import InputPlaces from "@/components/atom/Input/InputPlaces";
 
-const Login = () => {
+const CreateCampus = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors, isLoading },
+    formState: { isLoading },
   } = useForm();
-  const { submitLogin, AlertComponent } = ViewModel();
-  const { login } = formConst;
+  const { submitCampus, AlertComponent } = ViewModel();
+  const { campus } = formConst;
+
   return (
     <>
       <div style={containerStyles}>
         <div style={containerLoginStyles}>
           <Grid container spacing={4}>
             <Text
-              id={login.email}
-              label={i18n.emailLabel}
+              id={campus.name}
+              label={i18n.campusName}
               required={true}
               fullWidth={true}
               readOnly={false}
               control={control}
-              helperText={i18n.emailHelperText}
+              helperText={i18n.campusNameHelperText}
               xs={12}
-              md={6}
+              md={12}
             />
-            <Grid item xs={12} md={12}>
-              <Password
-                id={login.password}
-                label={i18n.passwordLabel}
-                control={control}
-                required={true}
-                fullWidth={true}
-                readOnly={false}
-                helperText={i18n.passwordHelperText}
-              />
-            </Grid>
+            <InputPlaces
+              id={campus.address}
+              label={i18n.campusAddress}
+              control={control}
+              required={true}
+              placeholder={i18n.campusAddressPlaceholder}
+            />
             <Grid item xs={12} md={12}>
               <MaterialButton
                 color="primary"
-                text={i18n.send}
-                onClick={handleSubmit(submitLogin)}
+                text={i18n.createGame}
+                onClick={handleSubmit(submitCampus)}
                 disabled={isLoading}
               />
             </Grid>
@@ -60,4 +60,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default CreateCampus;

@@ -1,7 +1,8 @@
 import { UserBase } from "@/utils/interfaces/interfaces";
 import { api } from "./interceptors";
-const API_AIR_URL = "http://localhost:3001/";
+import { env } from "process";
 
+const API_AIR_URL = env.NEXT_PUBLIC_API_APP || "http://localhost:3001/";
 // export const buildHeader = () => {
 //   const session = getSession();
 //   return {
@@ -13,7 +14,10 @@ const API_AIR_URL = "http://localhost:3001/";
 //   };
 // };
 
-export const loginUser: UserBase | any = async (email: string, password: string) => {
+export const loginUser: UserBase | any = async (
+  email: string,
+  password: string
+) => {
   const options = {
     headers: {
       email,
@@ -22,7 +26,10 @@ export const loginUser: UserBase | any = async (email: string, password: string)
     },
   };
   try {
-    let response = await api.get<UserBase | any>(`${API_AIR_URL}user/login`, options);
+    let response = await api.get<UserBase | any>(
+      `${API_AIR_URL}user/login`,
+      options
+    );
     return response;
   } catch (e) {
     console.error(e, "errorsssss");

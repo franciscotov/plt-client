@@ -10,5 +10,11 @@ export const formConst = {
     name: 'name',
     playersQuantity: 'playersQuantity',
     campusId: 'campusId'
+  },
+  campus: {
+    name: 'name',
+    address: 'address',
+    lng: 'lng',
+    lat: 'lat',
   }
 };

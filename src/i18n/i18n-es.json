@@ -32,6 +32,17 @@
     "playersQuantityHelperText": "Cantidad de jugadores es requerida",
     "titleSuccessCreateGame": "Juego creado",
     "msgSuccessCreateGame": "Juego creado te redireccionaremos",
-    "errorMsgCreateGame": "No se puedo crear el juego"
+    "errorMsgCreateGame": "No se puedo crear el juego",
+    "labelCreateGame": "Crear juego",
+    "labelCreateCampus": "Crear sede",
+    "helperTextAddress": "La dirección es requerida",
+    "helperTextAddressIncorrect": "Seleccione una dirección correcta",
+    "loading": "Loading...",
+    "campusName":"Nombre de la sede",
+    "campusNameHelperText": "Nombre de la sede es requerido",
+    "campusAddress": "Dirección de la sede",
+    "campusAddressPlaceholder": "Ingresa dirección",
+    "campusAddressHelperText": "Dirección de la sede es requerido"
+
 
 }

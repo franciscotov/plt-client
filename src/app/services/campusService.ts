@@ -1,10 +1,12 @@
-import { GameAttributes } from "@/utils/interfaces/interfaces";
+import { CampusAttributes } from "@/utils/interfaces/interfaces";
 import { api } from "./interceptors";
 import { getToken } from "@/utils/utils";
-const API_AIR_URL = "http://localhost:3001/";
+import { env } from "process";
 
-export const createGame: GameAttributes | any = async (
-  data: GameAttributes
+const API_AIR_URL = env.NEXT_PUBLIC_API_APP || "http://localhost:3001/";
+
+export const createCampus: CampusAttributes | any = async (
+  data: CampusAttributes
 ) => {
   const options = {
     headers: {
@@ -13,8 +15,8 @@ export const createGame: GameAttributes | any = async (
     },
   };
   try {
-    let response = await api.post<GameAttributes | any>(
-      `${API_AIR_URL}game/create`,
+    let response = await api.post<CampusAttributes | any>(
+      `${API_AIR_URL}campus/create`,
       data,
       options
     );

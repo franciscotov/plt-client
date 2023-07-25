@@ -1,7 +1,10 @@
+import { Metadata } from "next";
 import Image from "next/image";
 import styles from "./page.module.css";
+import { env } from "process";
 
 const Home = () => {
+  console.log("asasasasas", env.REACT_APP_API_KEY);
   return (
     <main className={styles.main}>
       <div className={styles.description}>

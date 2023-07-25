@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { loginUser } from "@/services/userService";
+import { loginUser } from "@/app/services/userService";
 import useAlert from "@/components/molecules/alert/AlertComponent";
 import { useRouter } from "next/navigation";
 import i18n from "@/i18n/i18n-es.json";
