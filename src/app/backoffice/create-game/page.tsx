@@ -9,15 +9,24 @@ import { formConst } from "@/constants";
 import i18n from "@/i18n/i18n-es.json";
 import InputStepper from "@/components/atom/Input/InputStepper";
 import Select from "@/components/atom/selects/select";
-import { campusIds, weekDays } from "@/utils/utils";
 
 const CreateGame = () => {
   const {
     control,
     handleSubmit,
     formState: { isLoading },
+    watch,
   } = useForm();
-  const { submitGame, AlertComponent, propsStepper } = ViewModel();
+  const {
+    submitGame,
+    AlertComponent,
+    propsStepper,
+    dataCampus,
+    loadingCampus,
+    dataDays,
+    loadingDays,
+    initHour,
+  } = ViewModel(watch);
   const { game } = formConst;
 
   return (
@@ -54,7 +63,7 @@ const CreateGame = () => {
               readOnly={false}
               control={control}
               helperText={i18n.endHourHelperText}
-              inputProps={propsStepper}
+              inputProps={{ ...propsStepper, min: Number(initHour || 0) + 1 }}
             />
             <InputStepper
               id={game.playersQuantity}
@@ -71,16 +80,20 @@ const CreateGame = () => {
               control={control}
               label={i18n.labelDay}
               placeholder={i18n.placeholderDay}
-              options={weekDays}
+              options={dataDays || []}
               helperText={i18n.dayHelperText}
+              loading={loadingDays}
+              required={true}
             />
             <Select
               id={game.campusId}
               control={control}
               label={i18n.labelCampus}
               placeholder={i18n.placeholderCampus}
-              options={campusIds}
+              options={dataCampus || []}
               helperText={i18n.campusIdHelperText}
+              loading={loadingCampus}
+              required={true}
             />
             <Grid item xs={12} md={12}>
               <MaterialButton

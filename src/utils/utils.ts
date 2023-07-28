@@ -140,8 +140,3 @@ export const weekDays: WeekDays[] = [
   {label: "Sabado", value: Day.Sabado},
   {label: "Domingo", value: Day.Domingo},
 ]
-
-export const campusIds: CampusIds[] = [
-  {label: "Banco nacion", value: 1},
-  {label: "Colegiales", value: 2},
-]

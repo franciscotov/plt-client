@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, forwardRef } from "react";
 import { Snackbar, AlertTitle } from "@mui/material";
 import MuiAlert, { AlertProps, AlertColor } from "@mui/material/Alert";

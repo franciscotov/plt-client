@@ -42,7 +42,9 @@
     "campusNameHelperText": "Nombre de la sede es requerido",
     "campusAddress": "Dirección de la sede",
     "campusAddressPlaceholder": "Ingresa dirección",
-    "campusAddressHelperText": "Dirección de la sede es requerido"
+    "campusAddressHelperText": "Dirección de la sede es requerido",
+    "errorMsgGetDataCampus" : "Error al intentar obtener las sedes",
+    "errorMsgGetDataDays" : "Error al intentar obtener las sedes"
 
 
 }

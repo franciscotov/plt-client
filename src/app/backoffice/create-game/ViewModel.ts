@@ -1,17 +1,29 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import { createGame } from "@/app/services/gameService";
 import useAlert from "@/components/molecules/alert/AlertComponent";
 import { useRouter } from "next/navigation";
 import i18n from "@/i18n/i18n-es.json";
 import routes from "@/routes/routes";
-import { GameAttributes, UserBase } from "@/utils/interfaces/interfaces";
+import {
+  CampusAttributes,
+  DaysAttributes,
+  GameAttributes,
+  PaginateDTO,
+} from "@/utils/interfaces/interfaces";
 import { formConst } from "@/constants";
+import { getCampus, getDays } from "@/app/services/campusService";
 
-const ViewModel = () => {
+const ViewModel = (watch: any) => {
   const { AlertComponent, openSnackbar } = useAlert();
   const { push } = useRouter();
+  const [dataCampus, setDataCampus] = useState<[] | null>(null);
+  const [dataDays, setDataDays] = useState<[] | null>(null);
+  const [loadingCampus, setLoadingCampus] = useState(true);
+  const [loadingDays, setLoadingDays] = useState(true);
 
   const { game } = formConst;
+  const initHour = watch(game.initHour);
   const submitGame = async (data: any) => {
     const body: GameAttributes = formateDataGame(data);
     const res: any = await createGame(body);
@@ -29,12 +41,60 @@ const ViewModel = () => {
     openSnackbar(i18n.errorTitle, i18n.errorMsgCreateGame, "error");
   };
 
-  const manageWithValue = {
-    [game.day]: true,
-    [game.campusId]: true,
+  /*
+   * get campus data
+   */
+  const fetchDataCampus: PaginateDTO<CampusAttributes> | any = async () => {
+    const res: PaginateDTO<CampusAttributes> | any = await getCampus(0, 10);
+    if (res?.status === 200) {
+      if (res.data) {
+        setLoadingCampus(false);
+        const formatedRows = res.data.rows.map((campus: CampusAttributes) => ({
+          ...campus,
+          label: campus.name,
+          value: campus.id,
+        }));
+        setDataCampus(formatedRows);
+      } else {
+        setDataCampus([]);
+      }
+    } else {
+      openSnackbar(i18n.errorTitle, i18n.errorMsgGetDataCampus, "error");
+      setLoadingCampus(false);
+      setDataCampus([]);
+    }
   };
 
-  const convertValue = {
+  /*
+   * get days data
+   */
+  const fetchDataDays: PaginateDTO<DaysAttributes> | any = async () => {
+    const res: PaginateDTO<DaysAttributes> | any = await getDays(0, 10);
+    if (res?.status === 200) {
+      if (res.data) {
+        setLoadingDays(false);
+        const formatedRows = res.data.rows;
+        setDataDays(formatedRows);
+      } else {
+        setDataDays([]);
+      }
+    } else {
+      openSnackbar(i18n.errorTitle, i18n.errorMsgGetDataDays, "error");
+      setLoadingDays(false);
+      setDataDays([]);
+    }
+  };
+
+  useEffect(() => {
+    if (!dataCampus) {
+      fetchDataCampus();
+    }
+    if (!dataDays) {
+      fetchDataDays();
+    }
+  });
+
+  const manageWithValue = {
     [game.day]: true,
     [game.campusId]: true,
   };
@@ -57,6 +117,11 @@ const ViewModel = () => {
     submitGame,
     AlertComponent,
     propsStepper,
+    dataCampus,
+    loadingCampus,
+    dataDays,
+    loadingDays,
+    initHour,
   };
 };
 

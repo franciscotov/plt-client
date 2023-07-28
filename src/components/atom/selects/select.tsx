@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { Autocomplete, CircularProgress, Grid, TextField } from "@mui/material";
 import { Control, Controller } from "react-hook-form";
@@ -46,7 +47,7 @@ const Select = (props: SelectProps) => {
     loading = false,
     classesGrid = {},
   } = props;
-  const classes = useStyles()
+  const classes = useStyles();
   const [inputValue, setInputValue] = useState("");
   const getOptionSelected = (option: OptionProps, anotherOption: OptionProps) =>
     option.value === anotherOption.value;
@@ -69,7 +70,6 @@ const Select = (props: SelectProps) => {
         }) => {
           return (
             <Autocomplete
-              // label={label}
               placeholder={placeholder || i18n.commonLabel}
               getOptionLabel={(option) => (option.label ? option.label : "")}
               inputValue={inputValue || value?.label || ""}
@@ -78,7 +78,6 @@ const Select = (props: SelectProps) => {
                 if (!newvalue) onChange(newvalue);
               }}
               onClose={() => setInputValue("")}
-              // getOptionSelected={getOptionSelected}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -115,7 +114,6 @@ const Select = (props: SelectProps) => {
               }}
               options={getOptions()}
               disabled={disabled}
-              // required={required}
               loading={loading}
               noOptionsText={i18n.commonLabelNoOptions}
               getOptionDisabled={(option: any) => option.disabled}

@@ -37,6 +37,17 @@ export interface CampusAttributes {
   lng: number;
 }
 
+export interface DaysAttributes {
+  id?: number;
+  value: string;
+  label: string;
+}
+
+export interface PaginateDTO<T> {
+  count: number;
+  rows: T[];
+}
+
 export enum Day {
   Lunes = "lunes",
   Martes = "martes",
