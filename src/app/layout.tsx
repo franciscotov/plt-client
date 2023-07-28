@@ -20,8 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <Script
+          async
+          defer
           src={`https://maps.googleapis.com/maps/api/js?key=${env.NEXT_PUBLIC_REACT_APP_API_KEY}&libraries=places`}
-          integrity=""
         ></Script>
       </head>
       <body className={inter.className}>{children}</body>

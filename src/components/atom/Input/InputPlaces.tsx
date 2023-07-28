@@ -7,6 +7,7 @@ import PlacesAutocomplete, {
 import { Grid, TextField } from "@mui/material";
 import { Control, Controller } from "react-hook-form";
 import i18n from "@/i18n/i18n-es.json";
+import { inputPropsDefault } from "@/utils/utils";
 
 type ChangeEventHandler = React.ChangeEventHandler<
   HTMLInputElement | HTMLTextAreaElement
@@ -66,6 +67,7 @@ const InputPlaces = (props: TextProps): JSX.Element => {
             value={value && value.value ? value.value : value || ""}
             onChange={onChange}
             onSelect={(value: any) => handleSelect(value, onChange)}
+            googleCallbackName="myCallbackFunc"
           >
             {({
               getInputProps,
@@ -82,9 +84,9 @@ const InputPlaces = (props: TextProps): JSX.Element => {
                   required={required}
                   placeholder={placeholder}
                   {...getInputProps({})}
-                  // InputLabelProps={{
-                  //   ...inputPropsDefault(classesInput),
-                  // }}
+                  InputLabelProps={{
+                    ...inputPropsDefault(classes),
+                  }}
                   inputProps={{
                     maxLength: 100,
                   }}
