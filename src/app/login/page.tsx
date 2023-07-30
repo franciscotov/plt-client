@@ -8,6 +8,7 @@ import { containerLoginStyles, containerStyles } from "./contants";
 import ViewModel from "./ViewModel";
 import { formConst } from "@/constants";
 import i18n from "@/i18n/i18n-es.json";
+import Email from "@/components/atom/Input/Email";
 
 const Login = () => {
   const {
@@ -22,16 +23,13 @@ const Login = () => {
       <div style={containerStyles}>
         <div style={containerLoginStyles}>
           <Grid container spacing={4}>
-            <Text
+            <Email
               id={login.email}
               label={i18n.emailLabel}
               required={true}
               fullWidth={true}
-              readOnly={false}
               control={control}
-              helperText={i18n.emailHelperText}
-              xs={12}
-              md={6}
+              defaultValue=""
             />
             <Grid item xs={12} md={12}>
               <Password

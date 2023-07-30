@@ -1,7 +1,7 @@
 import React from "react";
 import { Controller, Control, FieldValues } from "react-hook-form";
 import i18n from "@/i18n/i18n-es.json";
-import { TextField } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import { useStyles } from "@/styles/Global";
 
 export function validateEmail(email: string) {
@@ -26,40 +26,42 @@ export default function Email(props: EmailProps): JSX.Element {
     defaultValue,
     label,
     required = false,
-    fullWidth = true,
+    fullWidth = false,
   } = props;
   const classes = useStyles();
 
   return (
-    <Controller
-      name={id}
-      control={control}
-      defaultValue={defaultValue}
-      render={({ field: { onChange, value }, fieldState: { error } }) => (
-        <TextField
-          id={id}
-          label={label}
-          variant="outlined"
-          value={value}
-          onChange={onChange}
-          error={!!error}
-          helperText={error ? error.message : null}
-          required={required}
-          fullWidth={fullWidth}
-          InputLabelProps={{
-            shrink: true,
-            classes: {
-              asterisk: classes.asterikColor.color,
-            },
-          }}
-        />
-      )}
-      rules={{
-        required: i18n.emailRequired,
-        validate: {
-          validateEmail: (v) => validateEmail(v) || i18n.emailInvalidFormat,
-        },
-      }}
-    />
+    <Grid item xs={12} md={12}>
+      <Controller
+        name={id}
+        control={control}
+        defaultValue={defaultValue}
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <TextField
+            id={id}
+            label={label}
+            variant="outlined"
+            value={value}
+            onChange={onChange}
+            error={!!error}
+            helperText={error ? error.message : null}
+            required={required}
+            fullWidth={fullWidth}
+            InputLabelProps={{
+              shrink: true,
+              classes: {
+                asterisk: classes.asterikColor.color,
+              },
+            }}
+          />
+        )}
+        rules={{
+          required: i18n.emailRequired,
+          validate: {
+            validateEmail: (v) => validateEmail(v) || i18n.emailInvalidFormat,
+          },
+        }}
+      />
+    </Grid>
   );
 }
