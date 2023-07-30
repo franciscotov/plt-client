@@ -48,6 +48,15 @@ export interface PaginateDTO<T> {
   rows: T[];
 }
 
+export interface Column {
+  text: string;
+  tag: string;
+  visible?: boolean;
+  quantity?: boolean;
+  sort?: boolean;
+  width?: string;
+}
+
 export enum Day {
   Lunes = "lunes",
   Martes = "martes",

@@ -6,10 +6,10 @@ import {
   useMediaQuery,
   Button,
   CircularProgress,
-} from '@material-ui/core';
+} from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
-import Email from '../Global/email';
+import Email from '../atom/Input/Email';
 import API from '../../api/api';
 
 import LogoTuten from './../../img/tuten.png';
@@ -45,7 +45,7 @@ export default function AccountRecovery():JSX.Element {
 
   const onSubmit: SubmitHandler<FormData> = async (dataForm) => {
     if (!executeRecaptcha)
-      return console.log('Execute recaptcha not yet available');
+      return console.log('Execute recaptcha');
 
     setProgress(true);
     try {

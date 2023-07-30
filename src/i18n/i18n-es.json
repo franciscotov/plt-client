@@ -44,7 +44,13 @@
     "campusAddressPlaceholder": "Ingresa dirección",
     "campusAddressHelperText": "Dirección de la sede es requerido",
     "errorMsgGetDataCampus" : "Error al intentar obtener las sedes",
-    "errorMsgGetDataDays" : "Error al intentar obtener las sedes"
-
+    "errorMsgGetDataDays" : "Error al intentar obtener las sedes",
+    "labelSearch": "Buscar",
+    "labelSearchButton": "Buscar",
+    "labelRowPerPage": "Filas por página",
+    "labelNoData": "No hay registros que mostrar",
+    "activateGame": "Activar",
+    "emailRequired": "El email es requerido",
+    "emailInvalidFormat": "El formato del correo es incorrecto"
 
 }

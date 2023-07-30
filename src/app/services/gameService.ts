@@ -26,3 +26,27 @@ export const createGame: GameAttributes | any = async (
     return undefined;
   }
 };
+
+export const getGames: GameAttributes | any = async (
+  page: number,
+  limit: number
+) => {
+  const options = {
+    headers: {
+      token: getToken(),
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    },
+  };
+  const data: any = {};
+  try {
+    let response = await api.post<GameAttributes[] | any>(
+      `${API_AIR_URL}game/list?limit=${limit}&offset=${page}`,
+      data,
+      options
+    );
+    return response;
+  } catch (e) {
+    console.error(e, "errorsssss");
+    return undefined;
+  }
+};
