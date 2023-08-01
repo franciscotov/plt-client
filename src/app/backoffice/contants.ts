@@ -11,7 +11,7 @@ export const containerStyles: CSSProperties = {
   flexDirection: "column",
   alignItems: "center",
   padding: "6rem",
-  minHeight: "100vh",
+  minHeight: "90vh",
 };
 
 export const containerLoginStyles: CSSProperties = {

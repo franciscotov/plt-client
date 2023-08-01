@@ -13,14 +13,12 @@ import {
   CircularProgress,
   TablePagination,
 } from "@mui/material";
-// import noData from "../../assets/images/no-data-found.svg";
 import { TableColHeader } from "./Header";
 import i18n from "@/i18n/i18n-es.json";
 import { Column } from "@/utils/interfaces/interfaces";
-import Image from "next/image";
+import FolderOffIcon from "@mui/icons-material/FolderOff";
 
 type ActionsType = (...args: any[]) => any;
-// type ActionsList = ActionsType[];
 
 interface TableProps {
   actions: ActionsType;
@@ -270,13 +268,7 @@ const TutenTable = (props: TableProps) => {
 
       {!loadingData && tableData.length === 0 && (
         <div style={{ textAlign: "center" }}>
-          {/* <Image
-              className={"classes.noData"}
-              src={"noData"}
-              alt=""
-              width={40}
-              height={10}
-            /> */}
+          <FolderOffIcon />
           <Typography className={"classes.noDataText"}>
             {i18n.labelNoData}
           </Typography>

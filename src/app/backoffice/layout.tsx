@@ -15,7 +15,7 @@ interface BackofficeLayoutProps {
 const BackofficeLayout = ({ children }: BackofficeLayoutProps) => {
   return (
     <>
-      <nav>
+      <nav style={{ backgroundColor: "blue", zIndex: "2" }}>
         <ul>
           {links.map(({ route, label }) => {
             return (

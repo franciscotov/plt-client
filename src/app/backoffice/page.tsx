@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { TutenTable } from "@/components/molecules/Table";
 import { Columns, containerStyles } from "./contants";
 import ViewModel from "./ViewModel";
@@ -27,7 +26,7 @@ const Backoffice = () => {
                   backgroundColor: "primary",
                 },
               }}
-              sx={{ width: "100%", justifySelf: 'center' }}
+              sx={{ width: "100%", justifySelf: "center" }}
               indicatorColor="primary"
               textColor="primary"
               value={status}
