@@ -33,6 +33,7 @@
     "titleSuccessCreateGame": "Juego creado",
     "msgSuccessCreateGame": "Juego creado te redireccionaremos",
     "errorMsgCreateGame": "No se puedo crear el juego",
+    "errorMsgGetDataGame" : "Error al intentar obtener los juegos",
     "labelCreateGame": "Crear juego",
     "labelCreateCampus": "Crear sede",
     "helperTextAddress": "La dirección es requerida",

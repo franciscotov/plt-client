@@ -9,10 +9,12 @@ import {
 import { getGames } from "../services/gameService";
 import { getCampus } from "../services/campusService";
 import { states } from "@/utils/utils";
+import useAlert from "@/components/molecules/alert/AlertComponent";
 
 const ViewModel = () => {
   const [status, setStatus] = useState(1);
   const [refresh, setRefresh] = useState(true);
+  const { AlertComponent, openSnackbar } = useAlert();
   const actions = () => [
     {
       text: i18n.activateGame,
@@ -28,6 +30,9 @@ const ViewModel = () => {
     },
   ];
 
+  /*
+   * get games data
+   */
   const getDataGames = async (
     pageData: number,
     limit: number,
@@ -35,7 +40,10 @@ const ViewModel = () => {
     orderData: number,
     filter: any
   ) => {
-    const res: PaginateDTO<GameAttributes> | any = await getGames(pageData, limit);
+    const res: PaginateDTO<GameAttributes> | any = await getGames(
+      pageData,
+      limit
+    );
     if (res?.status === 200) {
       if (res.data) {
         return { items: res.data.rows, total: res.data.count };
@@ -43,14 +51,40 @@ const ViewModel = () => {
         return { items: [], total: 0 };
       }
     } else {
-      // openSnackbar(i18n.errorTitle, i18n.errorMsgGetDataCampus, "error");
+      openSnackbar(i18n.errorTitle, i18n.errorMsgGetDataGame, "error");
+      return { items: [], total: 0 };
+    }
+  };
+
+  /*
+   * get campus data
+   */
+  const fetchDataCampus: PaginateDTO<CampusAttributes> | any = async (
+    pageData: number,
+    limit: number,
+    field: string,
+    orderData: number,
+    filter: any
+  ) => {
+    const res: PaginateDTO<CampusAttributes> | any = await getCampus(
+      pageData,
+      limit
+    );
+    if (res?.status === 200) {
+      if (res.data) {
+        return { items: res.data.rows, total: res.data.count };
+      } else {
+        return { items: [], total: 0 };
+      }
+    } else {
+      openSnackbar(i18n.errorTitle, i18n.errorMsgGetDataCampus, "error");
       return { items: [], total: 0 };
     }
   };
 
   const handleChange = (_e: any, state: number) => {
     setStatus(state);
-    setRefresh(!refresh)
+    setRefresh(!refresh);
   };
 
   const tabs: Tabs[] = [
@@ -72,29 +106,6 @@ const ViewModel = () => {
       "aria-controls": `simple-tabpanel-${index}`,
     };
   }
-
-  /*
-   * get campus data
-   */
-  const fetchDataCampus: PaginateDTO<CampusAttributes> | any = async (
-    pageData: number,
-    limit: number,
-    field: string,
-    orderData: number,
-    filter: any
-  ) => {
-    const res: PaginateDTO<CampusAttributes> | any = await getCampus(pageData, limit);
-    if (res?.status === 200) {
-      if (res.data) {
-        return { items: res.data.rows, total: res.data.count };
-      } else {
-        return { items: [], total: 0 };
-      }
-    } else {
-      // openSnackbar(i18n.errorTitle, i18n.errorMsgGetDataCampus, "error");
-      return { items: [], total: 0 };
-    }
-  };
 
   const getData = async (
     pageData: number,
@@ -118,6 +129,7 @@ const ViewModel = () => {
     tabs,
     handleIndex,
     status,
+    AlertComponent,
   };
 };
 

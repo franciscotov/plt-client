@@ -14,6 +14,7 @@ const Backoffice = () => {
     tabs,
     handleIndex,
     status,
+    AlertComponent,
   } = ViewModel();
 
   return (
@@ -63,6 +64,7 @@ const Backoffice = () => {
             />
           </Grid>
         </Grid>
+        <AlertComponent />
       </div>
     </>
   );
