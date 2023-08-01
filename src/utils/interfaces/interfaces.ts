@@ -57,6 +57,12 @@ export interface Column {
   width?: string;
 }
 
+export interface Tabs {
+  title: string;
+  state: number;
+  visible: boolean;
+}
+
 export enum Day {
   Lunes = "lunes",
   Martes = "martes",

@@ -51,6 +51,13 @@
     "labelNoData": "No hay registros que mostrar",
     "activateGame": "Activar",
     "emailRequired": "El email es requerido",
-    "emailInvalidFormat": "El formato del correo es incorrecto"
-
+    "emailInvalidFormat": "El formato del correo es incorrecto",
+    "gamesList": "Juegos",
+    "campusList": "Sedes",
+    "columnsName": "Nombre",
+    "columnsId": "ID",
+    "columnsInitHour": "Hora de inicio",
+    "columnsEndHour": "Hora de fin",
+    "columnsPlayersQuantity": "Jugadores",
+    "columnsAdress": "Dirección"
 }

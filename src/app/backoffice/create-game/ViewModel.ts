@@ -45,7 +45,7 @@ const ViewModel = (watch: any) => {
    * get campus data
    */
   const fetchDataCampus: PaginateDTO<CampusAttributes> | any = async () => {
-    const res: PaginateDTO<CampusAttributes> | any = await getCampus(0, 10);
+    const res: PaginateDTO<CampusAttributes> | any = await getCampus(0, 1000);
     if (res?.status === 200) {
       if (res.data) {
         setLoadingCampus(false);

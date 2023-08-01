@@ -1,5 +1,5 @@
 import jwt_decode from "jwt-decode";
-import { CampusIds, Day, UserBase, WeekDays } from "./interfaces/interfaces";
+import { Day, UserBase, WeekDays } from "./interfaces/interfaces";
 import routes from "@/routes/routes";
 
 export const storageKeys = {
@@ -140,3 +140,8 @@ export const weekDays: WeekDays[] = [
   {label: "Sabado", value: Day.Sabado},
   {label: "Domingo", value: Day.Domingo},
 ]
+
+export const states = {
+  game: 1,
+  campus: 2,
+};

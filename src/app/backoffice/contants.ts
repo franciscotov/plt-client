@@ -1,13 +1,14 @@
 import { formConst } from "@/constants";
 import { Column, Day, GameAttributes } from "@/utils/interfaces/interfaces";
+import { states } from "@/utils/utils";
 import { CSSProperties } from "react";
+import i18n from "@/i18n/i18n-es.json";
 
-const { game: gameNames } = formConst;
+const { game: gameNames, campus } = formConst;
 
 export const containerStyles: CSSProperties = {
   display: "flex",
   flexDirection: "column",
-  justifyContent: "space-between",
   alignItems: "center",
   padding: "6rem",
   minHeight: "100vh",
@@ -32,26 +33,34 @@ export const game: GameAttributes = {
   day: Day.Lunes,
 };
 
-export const Columns: Column[] = [
+export const Columns = (status: number): Column[] => [
   {
-    text: "Name",
+    text: i18n.columnsName,
     tag: gameNames.name,
     sort: true,
   },
   {
-    text: "ID",
+    text: i18n.columnsId,
     tag: gameNames.id,
   },
   {
-    text: "Hora de inicio",
+    text: i18n.columnsInitHour,
     tag: gameNames.initHour,
+    visible: status === states.game,
   },
   {
-    text: "Hora de fin",
+    text: i18n.columnsEndHour,
     tag: gameNames.endHour,
+    visible: status === states.game,
   },
   {
-    text: "Jugadores",
+    text: i18n.columnsPlayersQuantity,
     tag: gameNames.playersQuantity,
+    visible: status === states.game,
+  },
+  {
+    text: i18n.columnsAdress,
+    tag: campus.address,
+    visible: status === states.campus,
   },
 ];

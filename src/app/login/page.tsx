@@ -1,9 +1,8 @@
 "use client";
 import Password from "@/components/atom/Input/Password";
-import Text from "@/components/atom/Input/Text";
 import MaterialButton from "@/components/atom/Buttons";
 import { Grid } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { containerLoginStyles, containerStyles } from "./contants";
 import ViewModel from "./ViewModel";
 import { formConst } from "@/constants";
@@ -14,7 +13,7 @@ const Login = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors, isLoading },
+    formState: { isLoading },
   } = useForm();
   const { submitLogin, AlertComponent } = ViewModel();
   const { login } = formConst;

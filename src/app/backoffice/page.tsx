@@ -3,38 +3,66 @@ import { useState } from "react";
 import { TutenTable } from "@/components/molecules/Table";
 import { Columns, containerStyles } from "./contants";
 import ViewModel from "./ViewModel";
-import i18n from "@/i18n/i18n-es.json";
+import { Tab, Tabs, Grid } from "@mui/material";
 
 const Backoffice = () => {
-  const actions = () => [
-    {
-      text: i18n.activateGame,
-      close: true,
-      visible: true,
-      action: async (row: any) => {
-        // let arr = professionals.filter(
-        //   pro => pro.professionalId !== row.professionalId,
-        // )
-        // setProfessionals(arr)
-        // setRefreshProfessionalList(!refreshProfessionalList)
-      },
-    },
-  ];
-  const [refresh, setrefresh] = useState(true);
-  const { getDataGames } = ViewModel();
+  const {
+    getData,
+    refresh,
+    actions,
+    handleChange,
+    tabs,
+    handleIndex,
+    status,
+  } = ViewModel();
 
   return (
     <>
       <div style={containerStyles}>
-        <TutenTable
-          actions={actions}
-          getData={getDataGames}
-          columns={Columns}
-          elevation={1}
-          fieldToActive={"activo"}
-          refresh={refresh}
-          rowPage={10}
-        />
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={12}>
+            <Tabs
+              TabIndicatorProps={{
+                style: {
+                  backgroundColor: "primary",
+                },
+              }}
+              sx={{ width: "100%", justifySelf: 'center' }}
+              indicatorColor="primary"
+              textColor="primary"
+              value={status}
+              onChange={handleChange}
+              aria-label="basic tabs example"
+              centered
+              variant="fullWidth"
+            >
+              {tabs
+                .filter((tab) => tab.visible)
+                .map(({ title, state }, index) => {
+                  return (
+                    <Tab
+                      key={index}
+                      label={title}
+                      {...handleIndex(state)}
+                      style={{ lineHeight: "24px" }}
+                      value={state}
+                    />
+                  );
+                })}
+            </Tabs>
+          </Grid>
+          <Grid item xs={12} md={12}>
+            <TutenTable
+              actions={actions}
+              getData={getData}
+              columns={Columns(status)}
+              elevation={1}
+              fieldToActive={"active"}
+              refresh={refresh}
+              rowPage={10}
+            />
+          </Grid>
+        </Grid>
       </div>
     </>
   );

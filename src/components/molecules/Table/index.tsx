@@ -143,7 +143,6 @@ const TutenTable = (props: TableProps) => {
 
   const generateCheckBoxTable = (row: any) => {
     if (row.id) return selectedID === row.id;
-    else return selectedID === row.professionalId;
   };
 
   const generateTableCell = (row: any) => {
@@ -168,7 +167,6 @@ const TutenTable = (props: TableProps) => {
           row.id ? selectedID === row.id : selectedID === row.professionalId
         }
         selected={generateCheckBoxTable(row)}
-        role={""}
         key={`${(row.name ? row.name : "") + rowIndex + 1}`}
         className={`${classes.row}  
         ${classes.tableRow} ${classes.tableRowClick}`}
@@ -205,88 +203,86 @@ const TutenTable = (props: TableProps) => {
   };
 
   return (
-    <>
-      <Paper elevation={elevation}>
-        <TableContainer
-          id="contenedor"
-          onContextMenu={(e) => e.preventDefault()}
-          className={`${classes.containerTable}`}
-        >
-          <Table className={"classes.table"} aria-label="tuten table">
-            <TableHead>
-              <TableRow classes={{ hover: "classes.hover" }}>
-                {!!actions && (
-                  <TableCell
-                    style={{
-                      width: 45,
-                    }}
-                    className={"classes.cellHeader"}
-                  />
-                )}
-                {columns
-                  .filter(({ visible = true }) => visible)
-                  .map((column: Column, index: number) => {
-                    const { text, sort = false, tag, width } = column;
-                    return (
-                      <TableColHeader
-                        key={index}
-                        sort={sort}
-                        text={text}
-                        field={tag}
-                        orderBy={currentSorting}
-                        order={order}
-                        width={width}
-                        handleSort={handleSort}
-                      />
-                    );
-                  })}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {!loadingData &&
-                tableData.map((row, rowIndex) => (
-                  <React.Fragment key={rowIndex}>
-                    {generateTableRowCell(row, rowIndex)}
-                  </React.Fragment>
-                ))}
-            </TableBody>
-          </Table>
-          {loadingData && (
-            <div className={"classes.containerLoading"}>
-              <CircularProgress className={"classes.root"} />
-              <p>{i18n.loading}</p>
-            </div>
-          )}
-        </TableContainer>
-        {tableData.length > 0 && (
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25, 50]}
-            onPageChange={handleChangePage}
-            rowsPerPage={rowsPerPage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-            component="div"
-            labelRowsPerPage={i18n.labelRowPerPage}
-            count={total}
-            page={page}
-          />
+    <Paper elevation={elevation}>
+      <TableContainer
+        id="contenedor"
+        onContextMenu={(e) => e.preventDefault()}
+        className={`${classes.containerTable}`}
+      >
+        <Table className={"classes.table"} aria-label="tuten table">
+          <TableHead>
+            <TableRow classes={{ hover: "classes.hover" }}>
+              {!!actions && (
+                <TableCell
+                  style={{
+                    width: 45,
+                  }}
+                  className={"classes.cellHeader"}
+                />
+              )}
+              {columns
+                .filter(({ visible = true }) => visible)
+                .map((column: Column, index: number) => {
+                  const { text, sort = false, tag, width } = column;
+                  return (
+                    <TableColHeader
+                      key={index}
+                      sort={sort}
+                      text={text}
+                      field={tag}
+                      orderBy={currentSorting}
+                      order={order}
+                      width={width}
+                      handleSort={handleSort}
+                    />
+                  );
+                })}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {!loadingData &&
+              tableData.map((row, rowIndex) => (
+                <React.Fragment key={rowIndex}>
+                  {generateTableRowCell(row, rowIndex)}
+                </React.Fragment>
+              ))}
+          </TableBody>
+        </Table>
+        {loadingData && (
+          <div className={"classes.containerLoading"}>
+            <CircularProgress className={"classes.root"} />
+            <p>{i18n.loading}</p>
+          </div>
         )}
+      </TableContainer>
+      {tableData.length > 0 && (
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25, 50]}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+          component="div"
+          labelRowsPerPage={i18n.labelRowPerPage}
+          count={total}
+          page={page}
+        />
+      )}
 
-        {!loadingData && tableData.length === 0 && (
-          <div style={{ textAlign: "center" }}>
-            {/* <Image
+      {!loadingData && tableData.length === 0 && (
+        <div style={{ textAlign: "center" }}>
+          {/* <Image
               className={"classes.noData"}
               src={"noData"}
               alt=""
               width={40}
               height={10}
             /> */}
-            <Typography className={"classes.noDataText"}>
-              {i18n.labelNoData}
-            </Typography>
-          </div>
-        )}
-      </Paper>
-    </>
+          <Typography className={"classes.noDataText"}>
+            {i18n.labelNoData}
+          </Typography>
+        </div>
+      )}
+    </Paper>
   );
 };
 
