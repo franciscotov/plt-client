@@ -12,7 +12,6 @@ const Backoffice = () => {
     actions,
     handleChange,
     tabs,
-    handleIndex,
     status,
     AlertComponent,
   } = ViewModel();
@@ -33,7 +32,6 @@ const Backoffice = () => {
               textColor="primary"
               value={status}
               onChange={handleChange}
-              aria-label="basic tabs example"
               centered
               variant="fullWidth"
             >
@@ -44,7 +42,6 @@ const Backoffice = () => {
                     <Tab
                       key={index}
                       label={title}
-                      {...handleIndex(state)}
                       style={{ lineHeight: "24px" }}
                       value={state}
                     />

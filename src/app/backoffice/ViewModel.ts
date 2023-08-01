@@ -100,13 +100,6 @@ const ViewModel = () => {
     },
   ];
 
-  function handleIndex(index: number) {
-    return {
-      id: `simple-tab-${index}`,
-      "aria-controls": `simple-tabpanel-${index}`,
-    };
-  }
-
   const getData = async (
     pageData: number,
     limit: number,
@@ -127,7 +120,6 @@ const ViewModel = () => {
     actions,
     handleChange,
     tabs,
-    handleIndex,
     status,
     AlertComponent,
   };
