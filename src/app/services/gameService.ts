@@ -50,3 +50,24 @@ export const getGames: GameAttributes | any = async (
     return undefined;
   }
 };
+
+export const updateGame: GameAttributes | any = async (row: any) => {
+  const options = {
+    headers: {
+      token: getToken(),
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    },
+  };
+  const data: GameAttributes = { ...row };
+  try {
+    let response = await api.put<GameAttributes | any>(
+      `${API_AIR_URL}game/update`,
+      data,
+      options
+    );
+    return response;
+  } catch (e) {
+    console.error(e, "errorsssss");
+    return undefined;
+  }
+};

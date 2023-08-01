@@ -64,7 +64,7 @@ const TutenTable = (props: TableProps) => {
     orderData: number | null,
     filter: any
   ) => {
-    let res = await getData(pageData, limit, field, orderData, filter, setPage);
+    let res = await getData(pageData, limit, field, orderData, filter);
     try {
       const resData = res;
       setTotal(resData.total);
@@ -87,7 +87,7 @@ const TutenTable = (props: TableProps) => {
   };
 
   const refreshData = async () => {
-    setupData(page + 1, rowsPerPage, currentSorting, order, searched);
+    setupData(page, rowsPerPage, currentSorting, order, searched);
     setPage(page);
   };
 
@@ -113,7 +113,7 @@ const TutenTable = (props: TableProps) => {
 
   const handleChangePage = async (event: any, newPage: number) => {
     setLoadingData(true);
-    setupData(newPage + 1, rowsPerPage, currentSorting, order, null);
+    setupData(newPage, rowsPerPage, currentSorting, order, null);
     setPage(newPage);
   };
 
@@ -138,8 +138,8 @@ const TutenTable = (props: TableProps) => {
 
   useEffect(() => {
     setLoadingData(true);
-    setupData(1, rowsPerPage, currentSorting, order, null);
-  }, [refresh, searchedSubmit]);
+    setupData(0, rowsPerPage, currentSorting, order, null);
+  }, [refresh]);
 
   const generateCheckBoxTable = (row: any) => {
     if (row.id) return selectedID === row.id;

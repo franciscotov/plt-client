@@ -6,8 +6,8 @@ import {
   PaginateDTO,
   Tabs,
 } from "@/utils/interfaces/interfaces";
-import { getGames } from "../services/gameService";
-import { getCampus } from "../services/campusService";
+import { getGames, updateGame } from "../services/gameService";
+import { getCampus, updateCampus } from "../services/campusService";
 import { states } from "@/utils/utils";
 import useAlert from "@/components/molecules/alert/AlertComponent";
 
@@ -15,20 +15,33 @@ const ViewModel = () => {
   const [status, setStatus] = useState(1);
   const [refresh, setRefresh] = useState(true);
   const { AlertComponent, openSnackbar } = useAlert();
-  const actions = () => [
+  const actions = (rowData: any) => [
     {
-      text: i18n.activateGame,
+      text: rowData.active ? i18n.deactivateGame : i18n.activateGame,
       close: true,
       visible: true,
       action: async (row: any) => {
-        // let arr = professionals.filter(
-        //   pro => pro.professionalId !== row.professionalId,
-        // )
-        // setProfessionals(arr)
-        // setRefreshProfessionalList(!refreshProfessionalList)
+        return await updateGameData(rowData);
       },
     },
   ];
+
+  /*
+   * update game data
+   */
+  const updateGameData = async (rowData: any) => {
+    rowData.active = !rowData.active;
+    let res: GameAttributes | any = null;
+    if (status === states.game) res = await updateGame(rowData);
+    else res = await updateCampus(rowData);
+    if (res?.status === 200) {
+      openSnackbar(i18n.titleSuccess, i18n.msgSuccessUpdateGame, "success");
+      setRefresh(!refresh);
+    } else {
+      openSnackbar(i18n.errorTitle, i18n.errorMsgUpdateGame, "error");
+      setRefresh(!refresh);
+    }
+  };
 
   /*
    * get games data

@@ -49,19 +49,18 @@ export const getCampus: PaginateDTO<CampusAttributes> | any = async (
   }
 };
 
-export const getDays: PaginateDTO<CampusAttributes> | any = async (
-  page: number,
-  limit: number
-) => {
+export const updateCampus: CampusAttributes | any = async (row: any) => {
   const options = {
     headers: {
       token: getToken(),
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
     },
   };
+  const data: CampusAttributes = { ...row };
   try {
-    let response = await api.get<PaginateDTO<CampusAttributes> | any>(
-      `${API_AIR_URL}days/list?limit=${limit}&offset=${page}`,
+    let response = await api.put<CampusAttributes | any>(
+      `${API_AIR_URL}campus/update`,
+      data,
       options
     );
     return response;

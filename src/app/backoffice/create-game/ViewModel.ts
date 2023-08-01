@@ -12,7 +12,8 @@ import {
   PaginateDTO,
 } from "@/utils/interfaces/interfaces";
 import { formConst } from "@/constants";
-import { getCampus, getDays } from "@/app/services/campusService";
+import { getCampus } from "@/app/services/campusService";
+import { getDays } from "@/app/services/daysService";
 
 const ViewModel = (watch: any) => {
   const { AlertComponent, openSnackbar } = useAlert();
