@@ -1,5 +1,5 @@
 "use client";
-import { TutenTable } from "@/components/molecules/Table";
+import { MyTable } from "@/components/molecules/Table";
 import { Columns, containerStyles } from "./contants";
 import ViewModel from "./ViewModel";
 import { Tab, Tabs, Grid } from "@mui/material";
@@ -49,7 +49,7 @@ const Backoffice = () => {
             </Tabs>
           </Grid>
           <Grid item xs={12} md={12}>
-            <TutenTable
+            <MyTable
               actions={actions}
               getData={getData}
               columns={Columns(status)}

@@ -12,6 +12,7 @@ import {
   Typography,
   CircularProgress,
   TablePagination,
+  Box,
 } from "@mui/material";
 import { TableColHeader } from "./Header";
 import i18n from "@/i18n/i18n-es.json";
@@ -30,13 +31,12 @@ interface TableProps {
   rowPage: number | null;
 }
 
-const TutenTable = (props: TableProps) => {
+const MyTable = (props: TableProps) => {
   const classes = useStyles();
   const [currentSorting, setCurrentSorting] = useState<string | null>(null);
   const [order, setOrder] = useState<number | null>(null);
   const [selectedID, setSelectedID] = useState(null);
   const [total, setTotal] = useState(0);
-  const [open, setOpen] = useState(false);
 
   let {
     actions,
@@ -50,10 +50,7 @@ const TutenTable = (props: TableProps) => {
   const [tableData, setTableData] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(rowPage || 0);
-  const [searched, setSearched] = useState("");
-  const [searchedSubmit] = useState("");
   const [loadingData, setLoadingData] = useState(true);
-  const ops = { year: "numeric", month: "2-digit", day: "2-digit" };
 
   const setupData = async (
     pageData: any,
@@ -74,19 +71,6 @@ const TutenTable = (props: TableProps) => {
       if (res?.status === 403) setTotal(0);
       setLoadingData(false);
     }
-  };
-  const requestSearch = (searchedVal: string) => {
-    setSearched(searchedVal);
-  };
-
-  const cancelSearch = () => {
-    setSearched("");
-    requestSearch(searched);
-  };
-
-  const refreshData = async () => {
-    setupData(page, rowsPerPage, currentSorting, order, searched);
-    setPage(page);
   };
 
   const handleSort = (field: string, newOrder: number) => {
@@ -109,7 +93,7 @@ const TutenTable = (props: TableProps) => {
     setupData(0, rowsPerPage, fi, od, null);
   };
 
-  const handleChangePage = async (event: any, newPage: number) => {
+  const handleChangePage = async (_event: any, newPage: number) => {
     setLoadingData(true);
     setupData(newPage, rowsPerPage, currentSorting, order, null);
     setPage(newPage);
@@ -121,7 +105,7 @@ const TutenTable = (props: TableProps) => {
     const rows = parseInt(event.target?.value, 10);
     setLoadingData(true);
     setRowsPerPage(rows);
-    const resData = await getData(0, rows, currentSorting, order, searched);
+    const resData = await getData(0, rows, currentSorting, order);
     if (resData.items) setLoadingData(false);
     setTotal(resData.total);
     setTableData(resData.items);
@@ -139,17 +123,10 @@ const TutenTable = (props: TableProps) => {
     setupData(0, rowsPerPage, currentSorting, order, null);
   }, [refresh]);
 
-  const generateCheckBoxTable = (row: any) => {
-    if (row.id) return selectedID === row.id;
-  };
-
-  const generateTableCell = (row: any) => {
+  const colorByState = (row: any) => {
     if (row[fieldToActive]) {
-      return null;
-    } else {
-      if (!fieldToActive) return null;
-      else return "classes.inactive";
-    }
+      return "rgba(0, 0, 0, 0.87)";
+    } else return "rgba(0, 0, 0, 0.38) !important";
   };
 
   const generateTableCellLink = (tag: string, quantity: boolean, row: any) => {
@@ -161,17 +138,21 @@ const TutenTable = (props: TableProps) => {
     return (
       <TableRow
         hover
-        aria-checked={
-          row.id ? selectedID === row.id : selectedID === row.professionalId
-        }
-        selected={generateCheckBoxTable(row)}
+        aria-checked={selectedID === row.id}
+        onClick={() => setSelectedID(row.id)}
+        selected={selectedID === row.id}
         key={`${(row.name ? row.name : "") + rowIndex + 1}`}
-        className={`${classes.row}  
-        ${classes.tableRow} ${classes.tableRowClick}`}
-        classes={{ hover: "classes.hover" }}
+        sx={{
+          ...classes.row,
+        }}
       >
         {actions && (
-          <TableCell className={"classes.cell"}>
+          <TableCell
+            sx={{
+              color: () => colorByState(row),
+              ...classes.cell,
+            }}
+          >
             <TutenTableActions
               active={activeRow}
               index={rowIndex}
@@ -187,9 +168,12 @@ const TutenTable = (props: TableProps) => {
             return (
               <TableCell
                 key={index}
-                className={`${"classes.cell"} ${generateTableCell(row)}`}
                 style={{
                   color: "rgba(0, 0, 0, 0.87)",
+                }}
+                sx={{
+                  color: () => colorByState(row),
+                  ...classes.cell,
                 }}
               >
                 {generateTableCellLink(tag, quantity, row)}
@@ -205,17 +189,19 @@ const TutenTable = (props: TableProps) => {
       <TableContainer
         id="contenedor"
         onContextMenu={(e) => e.preventDefault()}
-        className={`${classes.containerTable}`}
+        sx={classes.containerTable}
       >
-        <Table className={"classes.table"} aria-label="tuten table">
+        <Table aria-label="tuten table" sx={classes.table}>
           <TableHead>
-            <TableRow classes={{ hover: "classes.hover" }}>
+            <TableRow>
               {!!actions && (
                 <TableCell
                   style={{
                     width: 45,
                   }}
-                  className={"classes.cellHeader"}
+                  sx={{
+                    ...classes.cellHeader,
+                  }}
                 />
               )}
               {columns
@@ -247,10 +233,10 @@ const TutenTable = (props: TableProps) => {
           </TableBody>
         </Table>
         {loadingData && (
-          <div className={"classes.containerLoading"}>
-            <CircularProgress className={"classes.root"} />
+          <Box sx={classes.containerLoading}>
+            <CircularProgress sx={{ marginBottom: 1 }} />
             <p>{i18n.loading}</p>
-          </div>
+          </Box>
         )}
       </TableContainer>
       {tableData.length > 0 && (
@@ -267,15 +253,13 @@ const TutenTable = (props: TableProps) => {
       )}
 
       {!loadingData && tableData.length === 0 && (
-        <div style={{ textAlign: "center" }}>
+        <Box sx={classes.noData}>
           <FolderOffIcon />
-          <Typography className={"classes.noDataText"}>
-            {i18n.labelNoData}
-          </Typography>
-        </div>
+          <Typography sx={classes.noDataText}>{i18n.labelNoData}</Typography>
+        </Box>
       )}
     </Paper>
   );
 };
 
-export { TutenTable };
+export { MyTable };

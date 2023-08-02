@@ -59,8 +59,8 @@ export const useStyles = () => {
       backgroundColor: "rgba(0, 0, 0, 0.04) !important",
     },
     cell: {
-      padding: "4px 8px 4px 12px !important",
-      lineHeight: "24px !important",
+      padding: "0",
+      lineHeight: "24px",
       overflow: "hidden",
       maxWidth: "200px",
       whiteSpace: "nowrap",
@@ -85,12 +85,13 @@ export const useStyles = () => {
       width: 1,
     },
     noData: {
-      marginTop: 43,
+      marginTop: "20px",
+      textAlign: "center",
     },
     noDataText: {
       fontSize: 20,
       fontWeight: 500,
-      paddingBottom: 35,
+      paddingBottom: 2,
     },
     inactive: {
       color: "rgba(0, 0, 0, 0.38) !important",
@@ -173,12 +174,8 @@ export const useStyles = () => {
       // color: theme.palette.action.active || "rgba(0,0,0, 0.54)",
     },
     cellHeader: {
-      padding: "10px 6px 10px 8px !important",
-    },
-    textHeader: {
-      fontWeight: "700 !important",
-      backgroundColor: "#FFFFFF",
-      padding: "10px 6px 10px 8px !important",
+      padding: "8px 8px 8px 0px",
+      fontWeight: "700",
     },
     rejectedAlert: {
       width: "606px !important",

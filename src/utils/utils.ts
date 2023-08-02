@@ -145,3 +145,20 @@ export const states = {
   game: 1,
   campus: 2,
 };
+
+export const convertHexToRGB = (hexColor: string) => {
+  let c
+  try {
+    if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hexColor)) {
+      c = hexColor.substring(1).split('')
+      if (c.length == 3) {
+        c = [c[0], c[0], c[1], c[1], c[2], c[2]]
+      }
+      c = '0x' + c.join('')
+      c = [(Number(c) >> 16) & 255, (Number(c) >> 8) & 255, Number(c) & 255].join(',')
+      return c
+    } else return '0, 174, 199'
+  } catch (e) {
+    return '0, 174, 199'
+  }
+}

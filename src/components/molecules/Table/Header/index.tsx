@@ -3,8 +3,7 @@ import { Box, Typography, TableCell } from "@mui/material";
 import MaterialButton from "@/components/atom/Buttons";
 import { useStyles } from "./styles";
 import { useStyles as useTableStyles } from "../styles";
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import { any, bool, func, string } from "prop-types";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 const TableHeader = (props: any) => {
   const classes = useStyles();
@@ -22,8 +21,8 @@ const TableHeader = (props: any) => {
   } = props;
 
   return (
-    <Box className={"classes.header"}>
-      <Typography className={"classes.title"}>{title}</Typography>
+    <Box sx={{ ...classes.header }}>
+      <Typography sx={{ ...classes.title }}>{title}</Typography>
       <div>
         {showSecondButton && (
           <MaterialButton
@@ -47,12 +46,6 @@ const TableHeader = (props: any) => {
   );
 };
 
-TableHeader.propTypes = {
-  title: any,
-  buttonText: any,
-  action: func,
-};
-
 const TableColHeader = (props: any) => {
   const classes = useTableStyles();
   const [showArrows, setShowArrows] = useState(false);
@@ -68,9 +61,11 @@ const TableColHeader = (props: any) => {
   if (!sort || !field)
     return (
       <TableCell
-        className={"classes.textHeader"}
         style={{
           minWidth: width ? width : "auto",
+        }}
+        sx={{
+          ...classes.cellHeader,
         }}
       >
         {text}
@@ -84,24 +79,29 @@ const TableColHeader = (props: any) => {
 
   return (
     <TableCell
-      className={`${classes.sortable} ${classes.textHeader}`}
       onClick={() => handleSort(field, nextOrder(order))}
       onMouseEnter={() => setShowArrows(true)}
       onMouseLeave={() => setShowArrows(false)}
       style={{
         minWidth: width ? width : "auto",
       }}
+      sx={{
+        ...classes.cellHeader,
+        ...classes.sortable,
+      }}
     >
       {text}
       <ArrowDownwardIcon
-        className={"classes.icon"}
         style={{
           visibility: showArrows
-            ? 'visible'
+            ? "visible"
             : orderBy != field || order == 2
-            ? 'hidden'
-            : 'visible',
+            ? "hidden"
+            : "visible",
           transform: `rotate(${order < 2 ? order * 180 : 0}deg)`,
+        }}
+        sx={{
+          ...classes.icon,
         }}
       />
     </TableCell>
