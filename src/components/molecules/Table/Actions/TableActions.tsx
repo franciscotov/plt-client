@@ -3,7 +3,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { MenuItem, Menu, IconButton, ListItemText } from "@mui/material";
 import { useStyles } from "./styles";
 
-const TutenTableActions = (props: any) => {
+const TableActions = (props: any) => {
   const classes = useStyles();
   const { active, index, row, actions } = props;
   const [anchorEl, setAnchorEl] = useState(null);
@@ -36,9 +36,9 @@ const TutenTableActions = (props: any) => {
           e.stopPropagation();
           handleClick(e);
         }}
-        className={"classes.buttonActions"}
+        sx={classes.buttonActions}
       >
-        <MoreHorizIcon />
+        <MoreHorizIcon className="actions" />
       </IconButton>
       <Menu
         id="customized-menu"
@@ -70,10 +70,7 @@ const TutenTableActions = (props: any) => {
                   handleAction(action, row, close);
                 }}
               >
-                <ListItemText
-                  classes={{ primary: "classes.actionText" }}
-                  primary={text}
-                />
+                <ListItemText sx={classes.actionText} primary={text} />
               </MenuItem>
             );
           })}
@@ -82,4 +79,4 @@ const TutenTableActions = (props: any) => {
   );
 };
 
-export { TutenTableActions };
+export { TableActions };

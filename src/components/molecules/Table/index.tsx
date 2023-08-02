@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useStyles } from "./styles";
-import { TutenTableActions } from "./Actions/TutenTableActions";
+import { TableActions } from "./Actions/TableActions";
 import {
   Table,
   TableCell,
@@ -18,6 +18,8 @@ import { TableColHeader } from "./Header";
 import i18n from "@/i18n/i18n-es.json";
 import { Column } from "@/utils/interfaces/interfaces";
 import FolderOffIcon from "@mui/icons-material/FolderOff";
+import { convertHexToRGB } from "@/utils/utils";
+import { Theme } from "@mui/system";
 
 type ActionsType = (...args: any[]) => any;
 
@@ -134,6 +136,11 @@ const MyTable = (props: TableProps) => {
     else return row[tag];
   };
 
+  const getBackgroundHover = (theme: Theme) => {
+    const c = convertHexToRGB(theme?.palette?.primary.main);
+    return `rgba(${c}, 0.04) !important`;
+  };
+
   const generateTableRowCell = (row: any, rowIndex: number) => {
     return (
       <TableRow
@@ -141,9 +148,12 @@ const MyTable = (props: TableProps) => {
         aria-checked={selectedID === row.id}
         onClick={() => setSelectedID(row.id)}
         selected={selectedID === row.id}
-        key={`${(row.name ? row.name : "") + rowIndex + 1}`}
+        key={rowIndex}
         sx={{
           ...classes.row,
+          ":hover": {
+            backgroundColor: getBackgroundHover,
+          },
         }}
       >
         {actions && (
@@ -151,9 +161,10 @@ const MyTable = (props: TableProps) => {
             sx={{
               color: () => colorByState(row),
               ...classes.cell,
+              ...classes.row,
             }}
           >
-            <TutenTableActions
+            <TableActions
               active={activeRow}
               index={rowIndex}
               actions={actions}

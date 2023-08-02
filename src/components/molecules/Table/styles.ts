@@ -47,6 +47,9 @@ export const useStyles = () => {
       minWidth: 650,
     },
     row: {
+      "&:hover": {
+        backgroundColor: "red",
+      },
       cursor: "pointer",
       "& .actions": {
         visibility: "hidden",
