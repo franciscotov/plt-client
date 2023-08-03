@@ -34,7 +34,6 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => {
-  console.log(theme.breakpoints.values, "theme");
   return {
     color: "inherit",
     "& .MuiInputBase-input": {

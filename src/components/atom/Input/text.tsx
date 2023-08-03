@@ -17,8 +17,17 @@ interface TextProps {
 
 export default function Text(props: TextProps): JSX.Element {
   const classes = useStyles();
-  const { control, id, helperText, label, required, fullWidth, readOnly, xs, md } =
-    props;
+  const {
+    control,
+    id,
+    helperText,
+    label,
+    required,
+    fullWidth,
+    readOnly,
+    xs,
+    md,
+  } = props;
 
   return (
     <Grid item xs={xs} md={md}>
@@ -39,9 +48,6 @@ export default function Text(props: TextProps): JSX.Element {
             fullWidth={fullWidth}
             InputLabelProps={{
               shrink: true,
-              classes: {
-                asterisk: classes.asterikColor.color,
-              },
             }}
             InputProps={{
               readOnly: readOnly,
