@@ -10,12 +10,25 @@ import { getGames, updateGame } from "../services/gameService";
 import { getCampus, updateCampus } from "../services/campusService";
 import { states } from "@/utils/utils";
 import useAlert from "@/components/molecules/alert/AlertComponent";
+import { SearchAppBarProps } from "@/components/molecules/Table/Header";
+import routes from "@/routes/routes";
+import { useRouter } from "next/navigation";
 
 const ViewModel = () => {
   const [status, setStatus] = useState(1);
+  const router = useRouter();
   const [refresh, setRefresh] = useState(true);
+  const [textButton, setTextButton] = useState(i18n.labelCreateGame);
   const { AlertComponent, openSnackbar } = useAlert();
   const actions = (rowData: any) => [
+    {
+      text: rowData.active ? i18n.deactivateGame : i18n.activateGame,
+      close: true,
+      visible: true,
+      action: async () => {
+        return await updateGameData(rowData);
+      },
+    },
     {
       text: rowData.active ? i18n.deactivateGame : i18n.activateGame,
       close: true,
@@ -96,6 +109,11 @@ const ViewModel = () => {
   };
 
   const handleChange = (_e: any, state: number) => {
+    if (state === states.game) {
+      setTextButton(i18n.labelCreateGame);
+    } else {
+      setTextButton(i18n.labelCreateCampus);
+    }
     setStatus(state);
     setRefresh(!refresh);
   };
@@ -127,6 +145,31 @@ const ViewModel = () => {
     }
   };
 
+  const onClickButton = (_e: any) => {
+    setTimeout(() => {
+      if (status === states.game) {
+        router.push(routes.createGame);
+      } else {
+        router.push(routes.createCampus);
+      }
+    }, 500);
+  };
+
+  const onKeyDown = (e: KeyboardEvent) => {
+    e.stopPropagation();
+    if (e.code === "Enter") {
+      setRefresh(!refresh);
+      return;
+    }
+  };
+
+  const searchBarProps: SearchAppBarProps = {
+    textButton,
+    onClickButton,
+    onKeyDown,
+    placeholderSearch: i18n.placeholderSearch,
+  };
+
   return {
     getData,
     refresh,
@@ -135,6 +178,7 @@ const ViewModel = () => {
     tabs,
     status,
     AlertComponent,
+    searchBarProps,
   };
 };
 

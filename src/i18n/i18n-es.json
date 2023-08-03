@@ -9,6 +9,7 @@
     "titleSuccessLogin": "Redireccionando",
     "titleSuccess": "Exito",
     "send": "Enviar",
+    "placeholderSearch": "Buscar por nombre o id",
     "back": "Volver",
     "createGame": "Crear partido",
     "gameNameHelperText": "Nombre del partido es requerido",

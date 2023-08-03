@@ -1,7 +1,21 @@
 import React, { useState } from "react";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { MenuItem, Menu, IconButton, ListItemText } from "@mui/material";
+import {
+  MenuItem,
+  Menu,
+  IconButton,
+  ListItemText,
+  styled,
+} from "@mui/material";
 import { useStyles } from "./styles";
+
+const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
+  padding: "0 0px",
+  height: "auto",
+  [theme.breakpoints.up("sm")]: {
+    padding: "8px 8px",
+  },
+}));
 
 const TableActions = (props: any) => {
   const classes = useStyles();
@@ -63,7 +77,7 @@ const TableActions = (props: any) => {
           .map((row: any, index: number) => {
             const { text, action, close } = row;
             return (
-              <MenuItem
+              <StyledMenuItem
                 key={index}
                 onClick={(e) => {
                   e.stopPropagation();
@@ -71,7 +85,7 @@ const TableActions = (props: any) => {
                 }}
               >
                 <ListItemText sx={classes.actionText} primary={text} />
-              </MenuItem>
+              </StyledMenuItem>
             );
           })}
       </Menu>

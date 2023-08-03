@@ -17,13 +17,6 @@ const BackofficeLayout = ({ children }: BackofficeLayoutProps) => {
     <>
       <nav style={{ backgroundColor: "blue", zIndex: "2" }}>
         <ul>
-          {links.map(({ route, label }) => {
-            return (
-              <li key={route}>
-                <Link href={route}>{label}</Link>
-              </li>
-            );
-          })}
         </ul>
       </nav>
       {children}

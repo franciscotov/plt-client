@@ -1,47 +1,96 @@
 import React, { useState } from "react";
-import { Box, Typography, TableCell } from "@mui/material";
-import MaterialButton from "@/components/atom/Buttons";
-import { useStyles } from "./styles";
+import { Box, TableCell } from "@mui/material";
 import { useStyles as useTableStyles } from "../styles";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import { styled, alpha } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
+import MaterialButton from "@/components/atom/Buttons";
 
-const TableHeader = (props: any) => {
-  const classes = useStyles();
-  const {
-    title,
-    action,
-    buttonText,
-    variantButton,
-    disabledButton,
-    hiddenButton,
-    showSecondButton,
-    actionSecondButton,
-    variantSecondButton,
-    secondButtonText,
-  } = props;
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.1),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: "auto",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(1),
+  },
+}));
 
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => {
+  console.log(theme.breakpoints.values, "theme");
+  return {
+    color: "inherit",
+    "& .MuiInputBase-input": {
+      padding: theme.spacing(1, 1, 1, 0),
+      // vertical padding + font size from searchIcon
+      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+      transition: theme.transitions.create("width"),
+      width: "100%",
+    },
+  };
+});
+
+const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+  minHeight: "80px",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-evenly",
+  [theme.breakpoints.up("sm")]: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+}));
+
+export type SearchAppBarProps = {
+  textButton: string;
+  onClickButton: (...args: any[]) => any;
+  placeholderSearch: string;
+  onKeyDown: (...args: any[]) => any;
+};
+
+const SearchAppBar = (props: SearchAppBarProps) => {
+  const { textButton, onClickButton, placeholderSearch, onKeyDown } = props;
   return (
-    <Box sx={{ ...classes.header }}>
-      <Typography sx={{ ...classes.title }}>{title}</Typography>
-      <div>
-        {showSecondButton && (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar
+        position="static"
+        sx={{ flexGrow: 1, borderRadius: "5px 5px 0 0", boxShadow: "none" }}
+      >
+        <StyledToolbar>
           <MaterialButton
-            text={secondButtonText}
-            onClick={actionSecondButton}
-            variant={variantSecondButton}
-            disabled={disabledButton}
+            text={textButton}
+            onClick={onClickButton}
+            size="small"
           />
-        )}
-        {!hiddenButton && (
-          <MaterialButton
-            text={buttonText}
-            onClick={action}
-            variant={variantButton}
-            disabled={disabledButton}
-            // overrideClasses={classes.disabledMargin}
-          />
-        )}
-      </div>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder={placeholderSearch}
+              inputProps={{ "aria-label": "search" }}
+              onKeyDown={onKeyDown}
+            />
+          </Search>
+        </StyledToolbar>
+      </AppBar>
     </Box>
   );
 };
@@ -108,4 +157,4 @@ const TableColHeader = (props: any) => {
   );
 };
 
-export { TableHeader, TableColHeader };
+export { SearchAppBar, TableColHeader };

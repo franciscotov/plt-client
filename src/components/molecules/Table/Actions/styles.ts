@@ -2,7 +2,7 @@
 
 export const useStyles = () => ({
   actionText: {
-    fontSize: "16px !important",
+    fontSize: "14px !important",
   },
   buttonActions: {
     padding: "4px !important",

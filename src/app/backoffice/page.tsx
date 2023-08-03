@@ -13,56 +13,56 @@ const Backoffice = () => {
     tabs,
     status,
     AlertComponent,
+    searchBarProps,
   } = ViewModel();
 
   return (
-    <>
-      <div style={containerStyles}>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={12}>
-            <Tabs
-              TabIndicatorProps={{
-                style: {
-                  backgroundColor: "primary",
-                },
-              }}
-              sx={{ width: "100%", justifySelf: "center" }}
-              indicatorColor="primary"
-              textColor="primary"
-              value={status}
-              onChange={handleChange}
-              centered
-              variant="fullWidth"
-            >
-              {tabs
-                .filter((tab) => tab.visible)
-                .map(({ title, state }, index) => {
-                  return (
-                    <Tab
-                      key={index}
-                      label={title}
-                      style={{ lineHeight: "24px" }}
-                      value={state}
-                    />
-                  );
-                })}
-            </Tabs>
-          </Grid>
-          <Grid item xs={12} md={12}>
-            <MyTable
-              actions={actions}
-              getData={getData}
-              columns={Columns(status)}
-              elevation={1}
-              fieldToActive={"active"}
-              refresh={refresh}
-              rowPage={10}
-            />
-          </Grid>
+    <div style={containerStyles}>
+      <Grid container spacing={4}>
+        <Grid item xs={12} md={12}>
+          <Tabs
+            TabIndicatorProps={{
+              style: {
+                backgroundColor: "primary",
+              },
+            }}
+            sx={{ width: "100%", justifySelf: "center" }}
+            indicatorColor="primary"
+            textColor="primary"
+            value={status}
+            onChange={handleChange}
+            centered
+            variant="fullWidth"
+          >
+            {tabs
+              .filter((tab) => tab.visible)
+              .map(({ title, state }, index) => {
+                return (
+                  <Tab
+                    key={index}
+                    label={title}
+                    style={{ lineHeight: "24px" }}
+                    value={state}
+                  />
+                );
+              })}
+          </Tabs>
         </Grid>
-        <AlertComponent />
-      </div>
-    </>
+        <Grid item xs={12} md={12}>
+          <MyTable
+            actions={actions}
+            getData={getData}
+            columns={Columns(status)}
+            elevation={1}
+            fieldToActive={"active"}
+            refresh={refresh}
+            rowPage={10}
+            searchBarProps={searchBarProps}
+          />
+        </Grid>
+      </Grid>
+      <AlertComponent />
+    </div>
   );
 };
 

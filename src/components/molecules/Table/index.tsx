@@ -14,7 +14,7 @@ import {
   TablePagination,
   Box,
 } from "@mui/material";
-import { TableColHeader } from "./Header";
+import { SearchAppBar, SearchAppBarProps, TableColHeader } from "./Header";
 import i18n from "@/i18n/i18n-es.json";
 import { Column } from "@/utils/interfaces/interfaces";
 import FolderOffIcon from "@mui/icons-material/FolderOff";
@@ -31,6 +31,7 @@ interface TableProps {
   fieldToActive: string;
   refresh: boolean;
   rowPage: number | null;
+  searchBarProps: SearchAppBarProps
 }
 
 const MyTable = (props: TableProps) => {
@@ -48,6 +49,7 @@ const MyTable = (props: TableProps) => {
     fieldToActive,
     refresh,
     rowPage = 5,
+    searchBarProps,
   } = props;
   const [tableData, setTableData] = useState([]);
   const [page, setPage] = useState(0);
@@ -137,7 +139,7 @@ const MyTable = (props: TableProps) => {
   };
 
   const getBackgroundHover = (theme: Theme) => {
-    const c = convertHexToRGB(theme?.palette?.primary.main);
+    const c = convertHexToRGB(theme.palette.primary.main);
     return `rgba(${c}, 0.04) !important`;
   };
 
@@ -194,6 +196,12 @@ const MyTable = (props: TableProps) => {
 
   return (
     <Paper elevation={elevation}>
+      <SearchAppBar
+        textButton={searchBarProps.textButton}
+        onClickButton={searchBarProps.onClickButton}
+        placeholderSearch={searchBarProps.placeholderSearch}
+        onKeyDown= {searchBarProps.onKeyDown}
+      />
       <TableContainer
         id="contenedor"
         onContextMenu={(e) => e.preventDefault()}
