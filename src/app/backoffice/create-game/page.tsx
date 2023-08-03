@@ -43,7 +43,7 @@ const CreateGame = () => {
               control={control}
               helperText={i18n.gameNameHelperText}
               xs={12}
-              md={12}
+              md={6}
             />
             <InputStepper
               id={game.initHour}
@@ -95,7 +95,14 @@ const CreateGame = () => {
               loading={loadingCampus}
               required={true}
             />
-            <Grid item xs={12} md={12}>
+            <Grid item xs={4} md={4}>
+              <MaterialButton
+                color="secondary"
+                text={i18n.back}
+                onClick={() => history.back()}
+                disabled={isLoading}
+                sx={{ marginRight: "10px" }}
+              />
               <MaterialButton
                 color="primary"
                 text={i18n.createGame}

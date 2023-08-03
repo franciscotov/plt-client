@@ -21,7 +21,7 @@ export default function Text(props: TextProps): JSX.Element {
     props;
 
   return (
-    <Grid item xs={12} md={12}>
+    <Grid item xs={xs} md={md}>
       <Controller
         name={id}
         control={control}

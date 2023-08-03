@@ -6,7 +6,7 @@ interface MButton extends ButtonProps {
 }
 
 const MaterialButton = (props: MButton): JSX.Element => {
-  const { text, onClick, variant, disabled, type, color } = props;
+  const { text, onClick, variant, disabled, type, color, sx } = props;
   return (
     <Button
       variant={variant || 'contained'}
@@ -14,6 +14,7 @@ const MaterialButton = (props: MButton): JSX.Element => {
       disabled={disabled}
       type={type}
       onClick={onClick}
+      sx={sx}
     >
       {text}
     </Button>

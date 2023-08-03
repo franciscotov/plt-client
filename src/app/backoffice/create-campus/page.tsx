@@ -43,6 +43,13 @@ const CreateCampus = () => {
             />
             <Grid item xs={12} md={12}>
               <MaterialButton
+                color="secondary"
+                text={i18n.back}
+                onClick={() => history.back()}
+                disabled={isLoading}
+                sx={{ marginRight: "10px" }}
+              />
+              <MaterialButton
                 color="primary"
                 text={i18n.createGame}
                 onClick={handleSubmit(submitCampus)}

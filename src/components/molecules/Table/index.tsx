@@ -179,9 +179,6 @@ const MyTable = (props: TableProps) => {
             return (
               <TableCell
                 key={index}
-                style={{
-                  color: "rgba(0, 0, 0, 0.87)",
-                }}
                 sx={{
                   color: () => colorByState(row),
                   ...classes.cell,

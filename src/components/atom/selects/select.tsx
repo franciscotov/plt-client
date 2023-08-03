@@ -60,7 +60,7 @@ const Select = (props: SelectProps) => {
   };
 
   return (
-    <Grid item xs={12} sm={6} md={4} className={classesGrid?.grid}>
+    <Grid item xs={12} sm={6} md={6} className={classesGrid?.grid}>
       <Controller
         name={id}
         control={control}
