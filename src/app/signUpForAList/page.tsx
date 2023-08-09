@@ -9,13 +9,13 @@ import { formConst } from "@/constants";
 import i18n from "@/i18n/i18n-es.json";
 import Email from "@/components/atom/Input/Email";
 
-const Login = () => {
+const SignUpForAList = () => {
   const {
     control,
     handleSubmit,
     formState: { isLoading },
   } = useForm();
-  const { submitLogin, AlertComponent, submitLoginGoogle } = ViewModel();
+  const { submitLogin, AlertComponent } = ViewModel();
   const { login } = formConst;
   return (
     <>
@@ -49,14 +49,6 @@ const Login = () => {
                 disabled={isLoading}
               />
             </Grid>
-            <Grid item xs={12} md={12}>
-              <MaterialButton
-                color="primary"
-                text={i18n.loginWithGoogle}
-                onClick={submitLoginGoogle}
-                disabled={isLoading}
-              />
-            </Grid>
           </Grid>
         </div>
         <AlertComponent />
@@ -65,4 +57,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUpForAList;

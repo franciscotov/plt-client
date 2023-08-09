@@ -3,7 +3,7 @@ export interface UserBase {
   lastname: string;
   token: string;
   email: string;
-  role: string;
+  role?: RoleI;
   google: boolean;
 }
 
@@ -81,4 +81,10 @@ export interface WeekDays {
 export interface CampusIds {
   label: string;
   value: number;
+}
+
+export interface RoleI {
+  id: number;
+  value: string;
+  label: string;
 }
