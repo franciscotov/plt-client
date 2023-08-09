@@ -4,7 +4,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
-import { env } from "process";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,10 +40,7 @@ export default function RootLayout({
         <Script
           async
           defer
-          src={`https://maps.googleapis.com/maps/api/js?key=${
-            env.NEXT_PUBLIC_REACT_APP_API_KEY ||
-            "AIzaSyBVInFQ_FZEWP6Hjoftdo89onqUnD8C4DU"
-          }&libraries=places`}
+          src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_REACT_APP_API_KEY}&libraries=places`}
         ></Script>
       </head>
       <body className={inter.className}>
