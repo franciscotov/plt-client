@@ -51,7 +51,7 @@ const CreateCampus = () => {
               />
               <MaterialButton
                 color="primary"
-                text={i18n.createGame}
+                text={i18n.labelCreateCampus}
                 onClick={handleSubmit(submitCampus)}
                 disabled={isLoading}
               />

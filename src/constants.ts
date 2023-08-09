@@ -5,7 +5,7 @@ export const formConst = {
   },
   game: {
     id: "id",
-    day: "day",
+    day: "dayValue",
     initHour: "initHour",
     endHour: "endHour",
     name: "name",
