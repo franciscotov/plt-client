@@ -14,6 +14,11 @@ export const metadata: Metadata = {
 };
 
 const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#FF8000",
+    },
+  },
   components: {
     MuiFormLabel: {
       styleOverrides: {
@@ -36,7 +41,10 @@ export default function RootLayout({
         <Script
           async
           defer
-          src={`https://maps.googleapis.com/maps/api/js?key=${env.NEXT_PUBLIC_REACT_APP_API_KEY}&libraries=places`}
+          src={`https://maps.googleapis.com/maps/api/js?key=${
+            env.NEXT_PUBLIC_REACT_APP_API_KEY ||
+            "AIzaSyBVInFQ_FZEWP6Hjoftdo89onqUnD8C4DU"
+          }&libraries=places`}
         ></Script>
       </head>
       <body className={inter.className}>
