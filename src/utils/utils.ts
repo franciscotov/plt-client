@@ -21,6 +21,16 @@ export function getToken() {
 }
 
 /**
+ * Get current token
+ * @return {UserBase}
+ */
+export function getUserInfo(): UserBase {
+  const userInfo = localStorage.getItem(storageKeys.userInfo);
+  const session = JSON.parse(userInfo || "{}");
+  return session;
+}
+
+/**
  * Validate the session, if not token or token is not valid
  * redirect to login page
  */
@@ -117,29 +127,34 @@ export const useStylesInputLabel = () => ({
   },
 });
 
-export const defaultInputPropsStepper = { step: 0.01, min: 0, max: 100, lang: "en-US"}
+export const defaultInputPropsStepper = {
+  step: 0.01,
+  min: 0,
+  max: 100,
+  lang: "en-US",
+};
 
 export const variantTypes = {
-  outlined: 'outlined',
-  text: 'text',
-  contained: 'contained',
-  filled: 'filled',
-  standard: 'standard',
-  popover: 'popover',
-  paper: 'paper',
-  email: 'email',
-  number: 'number'
-}
+  outlined: "outlined",
+  text: "text",
+  contained: "contained",
+  filled: "filled",
+  standard: "standard",
+  popover: "popover",
+  paper: "paper",
+  email: "email",
+  number: "number",
+};
 
 export const weekDays: WeekDays[] = [
-  {label: "Lunes", value: Day.Lunes},
-  {label: "Martes", value: Day.Martes},
-  {label: "Miercoles", value: Day.Miercoles},
-  {label: "Jueves", value: Day.Jueves},
-  {label: "Viernes", value: Day.Viernes},
-  {label: "Sabado", value: Day.Sabado},
-  {label: "Domingo", value: Day.Domingo},
-]
+  { label: "Lunes", value: Day.Lunes },
+  { label: "Martes", value: Day.Martes },
+  { label: "Miercoles", value: Day.Miercoles },
+  { label: "Jueves", value: Day.Jueves },
+  { label: "Viernes", value: Day.Viernes },
+  { label: "Sabado", value: Day.Sabado },
+  { label: "Domingo", value: Day.Domingo },
+];
 
 export const states = {
   game: 1,
@@ -147,18 +162,22 @@ export const states = {
 };
 
 export const convertHexToRGB = (hexColor: string) => {
-  let c
+  let c;
   try {
     if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hexColor)) {
-      c = hexColor.substring(1).split('')
+      c = hexColor.substring(1).split("");
       if (c.length == 3) {
-        c = [c[0], c[0], c[1], c[1], c[2], c[2]]
+        c = [c[0], c[0], c[1], c[1], c[2], c[2]];
       }
-      c = '0x' + c.join('')
-      c = [(Number(c) >> 16) & 255, (Number(c) >> 8) & 255, Number(c) & 255].join(',')
-      return c
-    } else return '0, 174, 199'
+      c = "0x" + c.join("");
+      c = [
+        (Number(c) >> 16) & 255,
+        (Number(c) >> 8) & 255,
+        Number(c) & 255,
+      ].join(",");
+      return c;
+    } else return "0, 174, 199";
   } catch (e) {
-    return '0, 174, 199'
+    return "0, 174, 199";
   }
-}
+};

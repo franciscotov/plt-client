@@ -1,33 +1,34 @@
 import { UserBase } from "@/utils/interfaces/interfaces";
-import { api } from "./interceptors";
-import { env } from "process";
+import { api, buildHeader } from "./interceptors";
+import { GoogleUser } from "@/utils/types";
 
-const API_AIR_URL = env.NEXT_PUBLIC_API_APP || "http://localhost:3001/";
-// export const buildHeader = () => {
-//   const session = getSession();
-//   return {
-//     headers: {
-//       token: session.token,
-//       userId: session.userId,
-//       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-//     },
-//   };
-// };
+const API_AIR_URL = process.env.NEXT_PUBLIC_API_APP;
 
 export const loginUser: UserBase | any = async (
   email: string,
   password: string
 ) => {
-  const options = {
-    headers: {
-      email,
-      password,
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-    },
-  };
+  let options = buildHeader({ email, password });
   try {
     let response = await api.get<UserBase | any>(
       `${API_AIR_URL}user/login`,
+      options
+    );
+    return response;
+  } catch (e) {
+    console.error(e, "errorsssss");
+    return undefined;
+  }
+};
+
+export const loginUserGoogle: UserBase | any = async (
+  user: GoogleUser
+) => {
+  let options = buildHeader();
+  try {
+    let response = await api.post<UserBase | any>(
+      `${API_AIR_URL}user/login-google`,
+      user,
       options
     );
     return response;

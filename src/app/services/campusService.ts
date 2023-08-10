@@ -1,9 +1,8 @@
 import { CampusAttributes, PaginateDTO } from "@/utils/interfaces/interfaces";
 import { api } from "./interceptors";
 import { getToken } from "@/utils/utils";
-import { env } from "process";
 
-const API_AIR_URL = env.NEXT_PUBLIC_API_APP || "http://localhost:3001/";
+const API_AIR_URL = process.env.NEXT_PUBLIC_API_APP;
 
 export const createCampus: CampusAttributes | any = async (
   data: CampusAttributes
