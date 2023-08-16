@@ -9,7 +9,7 @@ export const formConst = {
     initHour: "initHour",
     endHour: "endHour",
     name: "name",
-    playersQuantity: "playersQuantity",
+    totalPlayers: "totalPlayers",
     campusId: "campusId",
   },
   campus: {

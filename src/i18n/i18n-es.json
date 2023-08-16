@@ -33,6 +33,7 @@
     "placeholderDay": "Selecciona día",
     "dayHelperText": "Día es requerido",
     "playersQuantity": "Cantidad de jugadores",
+    "playersQuantityPlaceholder": "Selecciona una cantidad",
     "playersQuantityHelperText": "Cantidad de jugadores es requerida",
     "titleSuccessCreateGame": "Juego creado",
     "msgSuccessCreateGame": "Juego creado te redireccionaremos",

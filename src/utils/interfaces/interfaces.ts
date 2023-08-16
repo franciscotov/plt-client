@@ -63,6 +63,12 @@ export interface Tabs {
   visible: boolean;
 }
 
+export interface GameTypeAttributes {
+  id: number;
+  value: string;
+  label: string;
+}
+
 export enum Day {
   Lunes = "lunes",
   Martes = "martes",

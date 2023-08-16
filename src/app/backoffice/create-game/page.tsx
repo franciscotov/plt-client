@@ -26,6 +26,8 @@ const CreateGame = () => {
     dataDays,
     loadingDays,
     initHour,
+    dataTypes,
+    loadingTypes
   } = ViewModel(watch);
   const { game } = formConst;
 
@@ -65,15 +67,15 @@ const CreateGame = () => {
               helperText={i18n.endHourHelperText}
               inputProps={{ ...propsStepper, min: Number(initHour || 0) + 1 }}
             />
-            <InputStepper
-              id={game.playersQuantity}
+            <Select
+              id={game.totalPlayers}
               label={i18n.playersQuantity}
               required={true}
-              fullWidth={true}
-              readOnly={false}
               control={control}
+              placeholder={i18n.playersQuantityPlaceholder}
               helperText={i18n.playersQuantityHelperText}
-              inputProps={propsStepper}
+              loading={loadingTypes}
+              options={dataTypes || []}
             />
             <Select
               id={game.day}

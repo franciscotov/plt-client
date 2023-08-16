@@ -55,7 +55,7 @@ export const Columns = (status: number): Column[] => [
   },
   {
     text: i18n.columnsPlayersQuantity,
-    tag: gameNames.playersQuantity,
+    tag: gameNames.totalPlayers,
     visible: status === states.game,
   },
   {

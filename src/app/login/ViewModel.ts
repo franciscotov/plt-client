@@ -18,6 +18,7 @@ const ViewModel = () => {
   const { push } = useRouter();
   const submitLogin = async (data: any) => {
     const res: UserBase | any = await loginUser(data.email, data.password);
+    console.log(res , 'res')
     if (res?.status === 200) {
       openSnackbar(i18n.titleSuccessLogin, i18n.msgSuccessLogin, "success");
       redirectUser(res.data);
@@ -31,7 +32,7 @@ const ViewModel = () => {
       // si es de tipo admin vamos al backoffice
       setLogin(user);
       if (user.role?.id !== 1) {
-        push(routes.backoffice);
+        push(routes.signUpForAList);
       } else {
         push(routes.backoffice);
       }
@@ -41,9 +42,6 @@ const ViewModel = () => {
   const submitLoginGoogle = async () => {
     signInWithPopup(auth, provider)
       .then(async (result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        // enviar al back para obtener un token valido
         const user: GoogleUser = result.user;
         let res = await loginUserGoogle(user);
         if (res.status === 200) {
