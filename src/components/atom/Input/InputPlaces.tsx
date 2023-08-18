@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useStyles } from "../../../styles/Global";
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -9,9 +9,25 @@ import { Control, Controller } from "react-hook-form";
 import i18n from "@/i18n/i18n-es.json";
 import { inputPropsDefault } from "@/utils/utils";
 
-type ChangeEventHandler = React.ChangeEventHandler<
-  HTMLInputElement | HTMLTextAreaElement
->;
+const useOwnStyles = () => ({
+  sugerencias: {
+    position: "absolute",
+    zIndex: 2,
+    boxShadow: "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
+    width: "56%",
+    "@media(maxWidth: 959px)": {
+      width: "100% !important",
+    },
+  },
+  sugerenciasHidden: {
+    display: "none",
+  },
+  rootInput: {
+    "& .MuiInputBase-input": {
+      padding: "18.5px 14px",
+    },
+  },
+});
 
 interface TextProps {
   id: string;
@@ -31,6 +47,7 @@ interface PlacesAutocompleteProps {
 const InputPlaces = (props: TextProps): JSX.Element => {
   const { id, control, label, required, placeholder } = props;
   const classes = useStyles();
+  const ownClasses = useOwnStyles();
   const handleSelect = async (value: any, onChange: any) => {
     const results = await geocodeByAddress(value);
     if (onChange) {
@@ -43,15 +60,12 @@ const InputPlaces = (props: TextProps): JSX.Element => {
     }
   };
 
-  // const classesInput = useStylesInputLabel();
   const generateClassSuggestion = (suggestions: any, loading: any) => {
-    // if (suggestions?.length === 0 && !loading) {
-    //   return classes.sugerenciasHidden;
-    // } else {
-    //   if (props.isModal) {
-    //     return classes.sugerencias2;
-    //   } else return classes.sugerencias;
-    // }
+    if (suggestions?.length === 0 && !loading) {
+      return ownClasses.sugerenciasHidden;
+    } else {
+      return ownClasses.sugerencias;
+    }
   };
 
   return (
@@ -90,24 +104,16 @@ const InputPlaces = (props: TextProps): JSX.Element => {
                   inputProps={{
                     maxLength: 100,
                   }}
-                  InputProps={{ classes: { root: "classes.rootInput" } }}
+                  InputProps={{ classes: { root: ownClasses.rootInput } }}
                   error={!!error}
-                  helperText={
-                    <span
-                      className={
-                        error ? "classes.textClassError" : "classes.textClass"
-                      }
-                    >
-                      {error && error?.message}
-                    </span>
-                  }
+                  helperText={error && error?.message}
                   inputRef={ref}
                 />
                 <Grid
-                  className={"generateClassSuggestion(suggestions, loading)"}
                   item={true}
                   md={7}
                   xs={12}
+                  sx={{ ...generateClassSuggestion(suggestions, loading) }}
                 >
                   {loading ? <div>{i18n.loading}</div> : null}
                   {suggestions.map((suggestion: any) => {
