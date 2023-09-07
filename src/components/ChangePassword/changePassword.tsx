@@ -7,10 +7,10 @@ import {
   Button,
   CircularProgress,
   Container,
-} from '@material-ui/core'
+} from '@mui/material'
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import { Link, useHistory, useLocation } from 'react-router-dom'
-import { FormattedMessage } from 'react-intl'
+// import { FormattedMessage } from 'react-intl'
 import Alert from '../Global/alert'
 
 import LogoTuten from './../../img/tuten.png'
@@ -19,7 +19,8 @@ import messages from './messages'
 import Password from '../atom/Input/password'
 import axios from 'axios'
 import { PasswordRequirementAlert } from './passwordRecoveryAlert';
-import { changePasswordWithToken } from '../../api/login'
+import Image from 'next/image'
+// import { changePasswordWithToken } from '../../api/login'
 
 type FormData = {
   password: string
@@ -45,7 +46,7 @@ export default function ChangePassword() {
     try {
       const token = query.get('token')
       const { password } = dataForm
-      await changePasswordWithToken(token, password)
+      // await changePasswordWithToken(token, password)
       setProgress(false)
       history.push({
         pathname: '/',
@@ -72,10 +73,10 @@ export default function ChangePassword() {
               <Grid item xs={12} className={classes.textContainer}>
                   <Box marginBottom={1}>
                       <Typography variant="h4" gutterBottom style={{ textAlign: 'left' }}>
-                          <FormattedMessage {...messages.header} />
+                          <span {...messages.header} />
                       </Typography>
                       <Typography variant="body1" className={classes.text}>
-                          <FormattedMessage {...messages.subheader} />
+                          <span {...messages.subheader} />
                       </Typography>
                   </Box>
               </Grid>
@@ -89,9 +90,8 @@ export default function ChangePassword() {
                   <Password
                     id='password'
                     label={messages.newPassword.defaultMessage}
-                    value={value}
-                    onChange={onChange}
-                    error={error}
+                    helperText={''}
+                    control={control}
                     required={true}
                     fullWidth={true}
                     readOnly={false}
@@ -126,9 +126,8 @@ export default function ChangePassword() {
                   <Password
                     id='repassword'
                     label={messages.repeatNewPassword.defaultMessage}
-                    value={value}
-                    onChange={onChange}
-                    error={error}
+                    control={control}
+                    helperText={''}
                     required={true}
                     fullWidth={true}
                     readOnly={false}
@@ -188,7 +187,7 @@ export default function ChangePassword() {
             )}
               <Box mt={8}>
                 <Grid item xs={12} >
-                  <img src={LogoTuten} alt='Logo de tuten' />
+                  <Image src={LogoTuten} alt='Logo de tuten' />
                 </Grid>
               </Box>
             </Grid>

@@ -16,7 +16,7 @@ interface PasswordProps {
   required: boolean;
   fullWidth: boolean;
   readOnly: boolean;
-  control: Control;
+  control: Control | any;
   helperText: string;
 }
 
