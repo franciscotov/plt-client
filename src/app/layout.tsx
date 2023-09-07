@@ -16,7 +16,7 @@ const theme = createTheme({
     MuiFormLabel: {
       styleOverrides: {
         asterisk: {
-          color: "red",
+          color: "#FF0000",
         },
       },
     },
