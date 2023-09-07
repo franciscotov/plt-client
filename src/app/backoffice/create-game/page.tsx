@@ -6,7 +6,7 @@ import { containerLoginStyles, containerStyles } from "./contants";
 import ViewModel from "./ViewModel";
 import { formConst } from "@/constants";
 import i18n from "@/i18n/i18n-es.json";
-import InputStepper from "@/components/atom/Input/InputStepper";
+import InputStepper from "@/components/atom/Input/inputStepper";
 import Select from "@/components/atom/selects/select";
 
 const CreateGame = () => {
