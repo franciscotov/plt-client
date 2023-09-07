@@ -18,7 +18,6 @@ const ViewModel = () => {
   const { push } = useRouter();
   const submitLogin = async (data: any) => {
     const res: UserBase | any = await loginUser(data.email, data.password);
-    console.log(res , 'res')
     if (res?.status === 200) {
       openSnackbar(i18n.titleSuccessLogin, i18n.msgSuccessLogin, "success");
       redirectUser(res.data);

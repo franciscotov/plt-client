@@ -4,6 +4,7 @@ import { Autocomplete, CircularProgress, Grid, TextField } from "@mui/material";
 import { Control, Controller } from "react-hook-form";
 import CustomEndAdornament from "../EndAdornament";
 import i18n from "@/i18n/i18n-es.json";
+import { GridMeasuresProps } from "@/utils/interfaces/interfaces";
 
 interface SelectProps {
   id: string;
@@ -17,6 +18,8 @@ interface SelectProps {
   validate?: any;
   loading?: boolean;
   classesGrid?: any;
+  fullWidth?: boolean;
+  gridMeasures?: GridMeasuresProps;
 }
 
 interface OptionProps {
@@ -33,7 +36,7 @@ const useStyles = () => ({
   },
 });
 
-const Select = (props: SelectProps) => {
+const Select = (props: SelectProps): JSX.Element => {
   const {
     id,
     control,
@@ -45,7 +48,8 @@ const Select = (props: SelectProps) => {
     helperText = "",
     validate = () => {},
     loading = false,
-    classesGrid = {},
+    fullWidth = false,
+    gridMeasures = { xs: 12, sm: 12, md: 12 },
   } = props;
   const classes = useStyles();
   const [inputValue, setInputValue] = useState("");
@@ -59,8 +63,10 @@ const Select = (props: SelectProps) => {
     );
   };
 
+  const { sm, xs, md}: GridMeasuresProps = gridMeasures
+
   return (
-    <Grid item xs={12} sm={6} md={6} className={classesGrid?.grid}>
+    <Grid item xs={xs} md={md} sm={sm}>
       <Controller
         name={id}
         control={control}
@@ -78,6 +84,7 @@ const Select = (props: SelectProps) => {
                 if (!newvalue) onChange(newvalue);
               }}
               onClose={() => setInputValue("")}
+              fullWidth={fullWidth}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -95,6 +102,7 @@ const Select = (props: SelectProps) => {
                   inputRef={ref}
                   helperText={error ? helperText : ""}
                   error={!!error}
+                  fullWidth={fullWidth}
                   InputProps={{
                     ...params.InputProps,
                     endAdornment: (

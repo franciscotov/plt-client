@@ -1,5 +1,4 @@
 "use client";
-import Text from "@/components/atom/Input/Text";
 import MaterialButton from "@/components/atom/Buttons";
 import { Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
@@ -27,7 +26,8 @@ const CreateGame = () => {
     loadingDays,
     initHour,
     dataTypes,
-    loadingTypes
+    loadingTypes,
+    gridMeasures,
   } = ViewModel(watch);
   const { game } = formConst;
 
@@ -36,17 +36,6 @@ const CreateGame = () => {
       <div style={containerStyles}>
         <div style={containerLoginStyles}>
           <Grid container spacing={4}>
-            <Text
-              id={game.name}
-              label={i18n.gameName}
-              required={true}
-              fullWidth={true}
-              readOnly={false}
-              control={control}
-              helperText={i18n.gameNameHelperText}
-              xs={12}
-              md={6}
-            />
             <InputStepper
               id={game.initHour}
               label={i18n.initHour}
@@ -76,6 +65,8 @@ const CreateGame = () => {
               helperText={i18n.playersQuantityHelperText}
               loading={loadingTypes}
               options={dataTypes || []}
+              fullWidth
+              gridMeasures={gridMeasures}
             />
             <Select
               id={game.day}
@@ -86,6 +77,8 @@ const CreateGame = () => {
               helperText={i18n.dayHelperText}
               loading={loadingDays}
               required={true}
+              fullWidth
+              gridMeasures={gridMeasures}
             />
             <Select
               id={game.campusId}
@@ -96,8 +89,10 @@ const CreateGame = () => {
               helperText={i18n.campusIdHelperText}
               loading={loadingCampus}
               required={true}
+              fullWidth
+              gridMeasures={gridMeasures}
             />
-            <Grid item xs={4} md={4}>
+            <Grid item xs={12} md={12}>
               <MaterialButton
                 color="secondary"
                 text={i18n.back}

@@ -5,10 +5,10 @@ export const formConst = {
   },
   game: {
     id: "id",
+    name: "name",
     day: "dayValue",
     initHour: "initHour",
     endHour: "endHour",
-    name: "name",
     totalPlayers: "totalPlayers",
     campusId: "campusId",
   },
@@ -17,5 +17,10 @@ export const formConst = {
     address: "address",
     lng: "lng",
     lat: "lat",
+  },
+  list: {
+    listId: "listId",
+    playerId: "playerId",
+    campusId: "campusId",
   },
 };

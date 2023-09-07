@@ -16,4 +16,5 @@ export const containerLoginStyles: CSSProperties = {
   position: "relative",
   padding: "1rem",
   minHeight: "70vh",
+  backgroundColor: "blue",
 };

@@ -37,10 +37,8 @@ export interface CampusAttributes {
   lng: number;
 }
 
-export interface DaysAttributes {
+export interface DaysAttributes extends SelectAttributes {
   id?: number;
-  value: string;
-  label: string;
 }
 
 export interface PaginateDTO<T> {
@@ -63,34 +61,51 @@ export interface Tabs {
   visible: boolean;
 }
 
-export interface GameTypeAttributes {
+export interface GameTypeAttributes extends SelectAttributes{
   id: number;
-  value: string;
-  label: string;
 }
 
 export enum Day {
-  Lunes = "lunes",
-  Martes = "martes",
-  Miercoles = "miercoles",
-  Jueves = "jueves",
-  Viernes = "viernes",
-  Sabado = "sabado",
-  Domingo = "domingo",
+  Lunes = "1",
+  Martes = "2",
+  Miercoles = "3",
+  Jueves = "4",
+  Viernes = "5",
+  Sabado = "6",
+  Domingo = "7",
 }
 
-export interface WeekDays {
+export interface SelectAttributes {
   label: string;
-  value: string;
+  value: number | string;
 }
 
-export interface CampusIds {
-  label: string;
-  value: number;
+export interface CampusIds extends SelectAttributes {
 }
 
-export interface RoleI {
+export interface RoleI extends SelectAttributes {
   id: number;
-  value: string;
-  label: string;
+}
+
+export interface GridMeasuresProps {
+  xs: number;
+  md: number;
+  sm: number;
+}
+
+export interface ListAttributes {
+  id: number;
+  name: string;
+  totalPlayers: number;
+  playersQuantity: number;
+  initHour: number;
+  endHour: number;
+  active: boolean;
+  gameId?: number;
+}
+
+export interface List {
+  listId: number;
+  campusId: number;
+  playerId: number;
 }

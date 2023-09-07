@@ -1,5 +1,5 @@
 import jwt_decode from "jwt-decode";
-import { Day, UserBase, WeekDays } from "./interfaces/interfaces";
+import { UserBase } from "./interfaces/interfaces";
 import routes from "@/routes/routes";
 
 export const storageKeys = {
@@ -145,16 +145,6 @@ export const variantTypes = {
   email: "email",
   number: "number",
 };
-
-export const weekDays: WeekDays[] = [
-  { label: "Lunes", value: Day.Lunes },
-  { label: "Martes", value: Day.Martes },
-  { label: "Miercoles", value: Day.Miercoles },
-  { label: "Jueves", value: Day.Jueves },
-  { label: "Viernes", value: Day.Viernes },
-  { label: "Sabado", value: Day.Sabado },
-  { label: "Domingo", value: Day.Domingo },
-];
 
 export const states = {
   game: 1,

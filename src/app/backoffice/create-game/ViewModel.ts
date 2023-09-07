@@ -6,15 +6,15 @@ import { useRouter } from "next/navigation";
 import i18n from "@/i18n/i18n-es.json";
 import routes from "@/routes/routes";
 import {
-  CampusAttributes,
   DaysAttributes,
   GameAttributes,
+  GridMeasuresProps,
   PaginateDTO,
 } from "@/utils/interfaces/interfaces";
 import { formConst } from "@/constants";
-import { getCampus } from "@/app/services/campusService";
 import { getDays } from "@/app/services/daysService";
 import { getTypes } from "@/app/services/gameTypeService";
+import { fetchDataCampus } from "@/app/services/fetchData";
 
 const ViewModel = (watch: any) => {
   const { AlertComponent, openSnackbar } = useAlert();
@@ -25,6 +25,8 @@ const ViewModel = (watch: any) => {
   const [loadingCampus, setLoadingCampus] = useState(true);
   const [loadingDays, setLoadingDays] = useState(true);
   const [loadingTypes, setLoadingTypes] = useState(true);
+
+  const gridMeasures: GridMeasuresProps = { sm: 6, md: 6, xs: 12 };
 
   const { game } = formConst;
   const initHour = watch(game.initHour);
@@ -43,30 +45,6 @@ const ViewModel = (watch: any) => {
       return;
     }
     openSnackbar(i18n.errorTitle, i18n.errorMsgCreateGame, "error");
-  };
-
-  /*
-   * get campus data
-   */
-  const fetchDataCampus: PaginateDTO<CampusAttributes> | any = async () => {
-    const res: PaginateDTO<CampusAttributes> | any = await getCampus(0, 1000);
-    if (res?.status === 200) {
-      if (res.data) {
-        setLoadingCampus(false);
-        const formatedRows = res.data.rows.map((campus: CampusAttributes) => ({
-          ...campus,
-          label: campus.name,
-          value: campus.id,
-        }));
-        setDataCampus(formatedRows);
-      } else {
-        setDataCampus([]);
-      }
-    } else {
-      openSnackbar(i18n.errorTitle, i18n.errorMsgGetDataCampus, "error");
-      setLoadingCampus(false);
-      setDataCampus([]);
-    }
   };
 
   /*
@@ -111,7 +89,7 @@ const ViewModel = (watch: any) => {
 
   useEffect(() => {
     if (!dataCampus) {
-      fetchDataCampus();
+      fetchDataCampus(setDataCampus, setLoadingCampus, openSnackbar);
     }
     if (!dataDays) {
       fetchDataDays();
@@ -152,6 +130,7 @@ const ViewModel = (watch: any) => {
     initHour,
     dataTypes,
     loadingTypes,
+    gridMeasures,
   };
 };
 
