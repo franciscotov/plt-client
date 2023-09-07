@@ -14,7 +14,6 @@ import Email from "../atom/Input/Email";
 
 import LogoTuten from "./../../img/tuten.png";
 // import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import Alert from "../Global/alert";
 
 import axios from "axios";
 import Image from "next/image";
@@ -160,18 +159,6 @@ export default function AccountRecovery(): JSX.Element {
               >
                 Cancelar
               </Button>
-            </Box>
-          </Grid>
-        )}
-        {errorAccountRecovery && (
-          <Grid item xs={12}>
-            <Box mt={isMobile ? -2 : 4}>
-              <Alert
-                body={errorAccountRecovery.message}
-                variant="outlined"
-                type="error"
-                onClose={() => setErrorAccountRecovery(undefined)}
-              />
             </Box>
           </Grid>
         )}

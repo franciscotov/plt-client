@@ -11,7 +11,6 @@ import {
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 // import { FormattedMessage } from 'react-intl'
-import Alert from '../Global/alert'
 
 import LogoTuten from './../../img/tuten.png'
 import { useStyles } from './styles'
@@ -20,6 +19,7 @@ import Password from '../atom/Input/password'
 import axios from 'axios'
 import { PasswordRequirementAlert } from './passwordRecoveryAlert';
 import Image from 'next/image'
+import { useStylesInputLabel } from '@/utils/utils'
 // import { changePasswordWithToken } from '../../api/login'
 
 type FormData = {
@@ -31,7 +31,7 @@ export default function ChangePassword() {
   const { control, handleSubmit, watch } = useForm<FormData>()
   const passwordRef = useRef<string>()
   passwordRef.current = watch('password')
-  const classes = useStyles()
+  const classes = useStylesInputLabel()
   const [progress, setProgress] = useState(false)
   const isMobile = useMediaQuery('(max-width:960px)')
 
@@ -70,12 +70,12 @@ export default function ChangePassword() {
         <Container maxWidth="xs">
           <Box mt={13}>
             <Grid container spacing={4} justifyContent="center">
-              <Grid item xs={12} className={classes.textContainer}>
+              <Grid item xs={12}>
                   <Box marginBottom={1}>
                       <Typography variant="h4" gutterBottom style={{ textAlign: 'left' }}>
                           <span {...messages.header} />
                       </Typography>
-                      <Typography variant="body1" className={classes.text}>
+                      <Typography variant="body1">
                           <span {...messages.subheader} />
                       </Typography>
                   </Box>
@@ -143,7 +143,7 @@ export default function ChangePassword() {
               />
             </Grid>
             <Grid item xs={12}>
-              <Grid container spacing={2} direction="row" className={classes.buttonContainer}>
+              <Grid container spacing={2} direction="row">
                 <Grid item xs={6} md={6}>
                   <Button
                     component={Link}
@@ -173,18 +173,6 @@ export default function ChangePassword() {
                 </Grid>
               </Grid>
             </Grid>
-            {errorChangePassword && (
-              <Grid item xs={12}>
-                <Box mt={isMobile ? -2 : 4}>
-                  <Alert
-                    body={errorChangePassword.message}
-                    variant='outlined'
-                    type='error'
-                    onClose={() => setErrorChangePassword(undefined)}
-                  />
-                </Box>
-              </Grid>
-            )}
               <Box mt={8}>
                 <Grid item xs={12} >
                   <Image src={LogoTuten} alt='Logo de tuten' />
