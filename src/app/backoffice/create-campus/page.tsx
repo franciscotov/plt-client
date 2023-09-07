@@ -7,7 +7,7 @@ import { containerLoginStyles, containerStyles } from "./contants";
 import ViewModel from "./ViewModel";
 import { formConst } from "@/constants";
 import i18n from "@/i18n/i18n-es.json";
-import InputPlaces from "@/components/atom/Input/inputPlaces";
+import InputPlaces from "@/components/atom/Input/inputPlaces.tsx";
 
 const CreateCampus = () => {
   const {
