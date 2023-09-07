@@ -8,7 +8,7 @@ import {
   DialogActions,
   Dialog,
   Typography,
-} from '@material-ui/core'
+} from '@mui/material'
 import CloseIcon from '@material-ui/icons/Close'
 import { MaterialButton } from '../../atomComponents/Buttons'
 import { useStyles } from './styles'

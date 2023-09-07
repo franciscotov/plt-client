@@ -1,6 +1,5 @@
-import { makeStyles } from '@material-ui/core'
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = theme => ({
   iconSearch: {
     color: theme.palette.primary.main,
   },
@@ -34,4 +33,4 @@ export const useStyles = makeStyles(theme => ({
   rootTextField: {
     maxWidth: '350px',
   },
-}))
+})

@@ -1,6 +1,5 @@
-import { makeStyles } from '@material-ui/core/styles'
 
-export const useStyles = makeStyles({
+export const useStyles = {
   text: {
     fontSize: '16px',
     lineHeight: '150%',
@@ -16,4 +15,4 @@ export const useStyles = makeStyles({
   buttonContainer: {
     marginTop: '6px',
   },
-})
+}

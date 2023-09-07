@@ -7,7 +7,7 @@ import {
   Checkbox,
   ListItemText,
   List,
-} from '@material-ui/core'
+} from '@mui/material'
 import { useStyles } from './styles'
 import { FilterInput } from './filterInput'
 import { array, func, shape } from 'prop-types'

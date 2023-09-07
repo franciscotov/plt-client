@@ -1,5 +1,5 @@
-import { makeStyles, Chip } from '@material-ui/core'
-import CancelIcon from '@material-ui/icons/Cancel'
+import { makeStyles, Chip } from '@mui/material'
+import CancelIcon from '@material-ui/icons-material/Cancel'
 
 const styles = makeStyles(() => ({
   chip: {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles, CircularProgress, IconButton } from '@material-ui/core'
+import { makeStyles, CircularProgress, IconButton } from '@mui/material'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 
 const useStyles = makeStyles(theme => {

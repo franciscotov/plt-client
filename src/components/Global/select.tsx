@@ -1,6 +1,6 @@
 import React from 'react'
 import { FieldError } from 'react-hook-form'
-import { TextField, MenuItem } from '@material-ui/core'
+import { TextField, MenuItem } from '@mui/material'
 
 import { useStyles } from '../../styles/Global'
 
@@ -35,7 +35,7 @@ export default function Select(props: SelectProps): JSX.Element {
         InputLabelProps={{
             shrink: true,
             classes: {
-                asterisk: classes.asterikColor
+                asterisk: classes.asterikColor.color
             }
         }}
     >

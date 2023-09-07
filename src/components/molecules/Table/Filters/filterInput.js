@@ -4,7 +4,7 @@ import {
   InputAdornment,
   Tooltip,
   IconButton,
-} from '@material-ui/core'
+} from '@mui/material'
 import SearchIcon from '@material-ui/icons/Search'
 import { func, any, shape } from 'prop-types'
 import { useStyles } from './filterInputStyles'

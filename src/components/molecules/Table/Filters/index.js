@@ -9,7 +9,7 @@ import {
   ButtonGroup,
   Grid,
   Tooltip,
-} from '@material-ui/core'
+} from '@mui/material'
 import FilterListIcon from '@material-ui/icons/FilterList'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
