@@ -16,7 +16,7 @@ import Alert from '../Global/alert'
 import LogoTuten from './../../img/tuten.png'
 import { useStyles } from './styles'
 import messages from './messages'
-import Password from '../atom/Input/password'
+import Password from '../atom/input/password'
 import axios from 'axios'
 import { PasswordRequirementAlert } from './passwordRecoveryAlert';
 import { changePasswordWithToken } from '../../api/login'

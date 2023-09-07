@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
-import Email from '../atom/Input/email';
+import Email from '../atom/input/email';
 import API from '../../api/api';
 
 import LogoTuten from './../../img/tuten.png';
