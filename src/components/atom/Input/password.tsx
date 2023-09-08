@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Control, Controller } from "react-hook-form";
 import { TextField, InputAdornment, IconButton } from "@mui/material";
-// import Visibility from '@material-ui/icons/Visibility'
-// import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 import { useStyles } from "../../../styles/Global";
 
@@ -63,7 +63,7 @@ export default function Password(props: PasswordProps): JSX.Element {
                   }}
                   edge="end"
                 >
-                  {/* {showPassword ? <Visibility /> : <VisibilityOff />} */}
+                  {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                 </IconButton>
               </InputAdornment>
             ),

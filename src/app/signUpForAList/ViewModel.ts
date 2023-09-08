@@ -11,7 +11,6 @@ import {
   UserBase,
 } from "@/utils/interfaces/interfaces";
 import { fetchDataCampus, fetchDataList } from "../services/fetchData";
-import { UseFormWatch } from "react-hook-form";
 
 const ViewModel = (watch: any) => {
   const { AlertComponent, openSnackbar } = useAlert();
@@ -19,7 +18,7 @@ const ViewModel = (watch: any) => {
   const [dataCampus, setDataCampus] = useState<[] | null>(null);
   const [loadingCampus, setLoadingCampus] = useState(true);
   const [dataList, setDataList] = useState<[] | null>(null);
-  const [loadingList, setLoadingList] = useState(true);
+  const [loadingList, setLoadingList] = useState(false);
   const campusSeleted: SelectAttributes = watch("campusId");
 
   const submitLogin = async (data: any) => {
@@ -49,6 +48,7 @@ const ViewModel = (watch: any) => {
 
   useEffect(() => {
     if (!dataList && campusSeleted) {
+      setLoadingList(true);
       fetchDataList(
         setDataList,
         setLoadingList,
@@ -57,7 +57,6 @@ const ViewModel = (watch: any) => {
       );
     }
   }, [campusSeleted]);
-  console.log(campusSeleted, "campusSeleted ");
 
   return {
     submitLogin,

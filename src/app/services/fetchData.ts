@@ -36,11 +36,11 @@ export const fetchDataCampus: PaginateDTO<CampusAttributes> | any = async (
 };
 
 /*
- * get campus data
+ * get list data
  */
 export const fetchDataList: PaginateDTO<ListAttributes> | any = async (
-  setDataCampus: any,
-  setLoadingCampus: any,
+  setDataList: any,
+  setLoadingList: any,
   openSnackbar: any,
   campusId: number
 ) => {
@@ -51,19 +51,19 @@ export const fetchDataList: PaginateDTO<ListAttributes> | any = async (
   );
   if (res?.status === 200) {
     if (res.data) {
-      setLoadingCampus(false);
+      setLoadingList(false);
       const formatedRows = res.data.map((list: ListAttributes) => ({
         ...list,
         label: list.name,
         value: list.id,
       }));
-      setDataCampus(formatedRows);
+      setDataList(formatedRows);
     } else {
-      setDataCampus([]);
+      setDataList([]);
     }
   } else {
-    openSnackbar(i18n.errorTitle, i18n.errorMsgGetDataCampus, "error");
-    setLoadingCampus(false);
-    setDataCampus([]);
+    openSnackbar(i18n.errorTitle, i18n.errorMsgGetDataList, "error");
+    setLoadingList(false);
+    setDataList([]);
   }
 };
