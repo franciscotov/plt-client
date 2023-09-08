@@ -7,10 +7,9 @@
     "npm": ">=9.5.1"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "cross-env NODE_ENV=development env-cmd -f env/env.dev next dev",
     "build": "next build",
     "start": "env-cmd -f env/env.pro next start",
-    "start:local": "cross-env NODE_ENV=development env-cmd -f env/env.dev next dev",
     "lint": "next lint"
   },
   "dependencies": {
