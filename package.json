@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "env-cmd -f env/env.pro next start",
+    "start:local": "cross-env NODE_ENV=development env-cmd -f env/env.dev next dev",
     "lint": "next lint"
   },
   "dependencies": {
@@ -24,6 +25,8 @@
     "@types/react-dom": "18.2.7",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.4.0",
+    "cross-env": "^7.0.3",
+    "env-cmd": "^10.1.0",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.10",
     "firebase": "^10.1.0",
