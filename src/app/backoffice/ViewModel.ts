@@ -32,7 +32,7 @@ const ViewModel = () => {
     {
       text: rowData.active ? i18n.deactivateGame : i18n.activateGame,
       close: true,
-      visible: true,
+      visible: false,
       action: async () => {
         return await updateGameData(rowData);
       },

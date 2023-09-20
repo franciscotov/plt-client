@@ -15,7 +15,7 @@ const SignUpForAList = () => {
     formState: { isLoading },
     watch
   } = useForm();
-  const { submitLogin, AlertComponent, dataCampus, loadingCampus, dataList, loadingList } =
+  const { submitSignUpPlayerToList, AlertComponent, dataCampus, loadingCampus, dataList, loadingList } =
     ViewModel(watch);
   const { list } = formConst;
   return (
@@ -24,7 +24,7 @@ const SignUpForAList = () => {
         <div style={containerLoginStyles}>
           <Grid container spacing={4}>
             <Select
-              id={list.campusId}
+              id={list.campus}
               control={control}
               label={i18n.labelCampus}
               placeholder={i18n.placeholderCampus}
@@ -35,7 +35,7 @@ const SignUpForAList = () => {
               fullWidth={true}
             />
             <Select
-              id={list.listId}
+              id={list.list}
               control={control}
               label={i18n.labelList}
               placeholder={i18n.placeholderList}
@@ -49,7 +49,7 @@ const SignUpForAList = () => {
               <MaterialButton
                 color="primary"
                 text={i18n.send}
-                onClick={handleSubmit(submitLogin)}
+                onClick={handleSubmit(submitSignUpPlayerToList)}
                 disabled={isLoading}
               />
             </Grid>

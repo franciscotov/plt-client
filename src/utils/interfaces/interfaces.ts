@@ -65,6 +65,14 @@ export interface GameTypeAttributes extends SelectAttributes{
   id: number;
 }
 
+export interface PlayerList {
+  listId: number;
+}
+
+export interface SignUpPlayerList extends PlayerList {
+  userEmail: string;
+}
+
 export enum Day {
   Lunes = "1",
   Martes = "2",

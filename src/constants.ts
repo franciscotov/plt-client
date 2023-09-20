@@ -19,8 +19,7 @@ export const formConst = {
     lat: "lat",
   },
   list: {
-    listId: "listId",
-    playerId: "playerId",
-    campusId: "campusId",
+    list: "list",
+    campus: "campus",
   },
 };
