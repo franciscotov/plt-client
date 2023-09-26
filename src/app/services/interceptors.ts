@@ -1,4 +1,4 @@
-import { getUserInfo, validateSession } from "@/utils/utils";
+import { validateSession } from "@/utils/utils";
 import axios from "axios";
 
 export const api = axios.create();
@@ -30,15 +30,3 @@ api.interceptors.response.use(
     return { error, data: "error" };
   }
 );
-
-export const buildHeader = (overwriteObj: any = {}) => {
-  const session = getUserInfo();
-  return {
-    headers: {
-      token: session.token,
-      google: session.google,
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-      ...overwriteObj,
-    },
-  };
-};

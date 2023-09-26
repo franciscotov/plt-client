@@ -1,6 +1,7 @@
-import { UserBase } from "@/utils/interfaces/interfaces";
-import { api, buildHeader } from "./interceptors";
+import { ExtendHeader, UserBase } from "@/utils/interfaces/interfaces";
+import { api } from "./interceptors";
 import { GoogleUser } from "@/utils/types";
+import { buildHeader } from "../hooks/basicParams";
 
 const API_AIR_URL = process.env.NEXT_PUBLIC_API_APP;
 
@@ -8,7 +9,8 @@ export const loginUser: UserBase | any = async (
   email: string,
   password: string
 ) => {
-  let options = buildHeader({ email, password });
+  const extraDatatoHeader: ExtendHeader = { email, password }
+  let options = buildHeader(extraDatatoHeader);
   try {
     let response = await api.get<UserBase | any>(
       `${API_AIR_URL}user/login`,

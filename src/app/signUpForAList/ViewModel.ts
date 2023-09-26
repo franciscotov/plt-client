@@ -5,10 +5,7 @@ import { useRouter } from "next/navigation";
 import i18n from "@/i18n/i18n-es.json";
 import routes from "@/routes/routes";
 import { setLogin } from "@/utils/utils";
-import {
-  SelectAttributes,
-  UserBase,
-} from "@/utils/interfaces/interfaces";
+import { SelectAttributes, UserBase } from "@/utils/interfaces/interfaces";
 import { fetchDataCampus, fetchDataList } from "../services/fetchData";
 import { signUpPlayerToList } from "../services/playerListService";
 import { formConst } from "@/constants";
@@ -23,8 +20,7 @@ const ViewModel = (watch: any) => {
   const [loadingList, setLoadingList] = useState(false);
   const campusSeleted: SelectAttributes = watch(list.campus);
 
-  const submitSignUpPlayerToList = async (data: any) => {
-    const res: UserBase | any = await signUpPlayerToList(data.list.value);
+  const handleData = (res: any) => {
     if (res?.status === 200) {
       openSnackbar(i18n.titleSuccessLogin, i18n.msgSuccessLogin, "success");
       setTimeout(() => {
@@ -42,10 +38,13 @@ const ViewModel = (watch: any) => {
     openSnackbar(i18n.errorTitle, i18n.errorMsgLogin, "error");
   };
 
+  const submitSignUpPlayerToList = async (data: any) => {
+    const res: UserBase | any = await signUpPlayerToList(data.list.value);
+    handleData(res);
+  };
+
   useEffect(() => {
-    if (!dataCampus) {
-      fetchDataCampus(setDataCampus, setLoadingCampus, openSnackbar);
-    }
+    fetchDataCampus(setDataCampus, setLoadingCampus, openSnackbar);
   });
 
   useEffect(() => {

@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 export const formConst = {
   login: {
     email: "email",
@@ -22,4 +24,15 @@ export const formConst = {
     list: "list",
     campus: "campus",
   },
+};
+
+export const containerNavbar: CSSProperties = {
+  // display: "abso",
+  // justifyContent: "center",
+  // alignItems: "center",
+  position: "absolute",
+  width: '100%',
+  padding: "1rem",
+  minHeight: "10vh",
+  backgroundColor: "blue",
 };

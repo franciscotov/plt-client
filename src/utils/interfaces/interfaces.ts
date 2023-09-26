@@ -1,4 +1,5 @@
 export interface UserBase {
+  id: number;
   name: string;
   lastname: string;
   token: string;
@@ -8,7 +9,6 @@ export interface UserBase {
 }
 
 export interface UserAttributes extends UserBase {
-  id: number;
   address: boolean;
   dni: string;
   phoneNumber: string;
@@ -61,7 +61,7 @@ export interface Tabs {
   visible: boolean;
 }
 
-export interface GameTypeAttributes extends SelectAttributes{
+export interface GameTypeAttributes extends SelectAttributes {
   id: number;
 }
 
@@ -88,8 +88,7 @@ export interface SelectAttributes {
   value: number | string;
 }
 
-export interface CampusIds extends SelectAttributes {
-}
+export interface CampusIds extends SelectAttributes {}
 
 export interface RoleI extends SelectAttributes {
   id: number;
@@ -116,4 +115,41 @@ export interface List {
   listId: number;
   campusId: number;
   playerId: number;
+}
+
+export interface Headers {
+  headers: Header;
+}
+
+export interface Header{
+  token: string;
+  userId: number;
+}
+
+export interface ExtendHeader {
+  email?: string;
+  password?: string;
+}
+
+export interface ApiBody {
+  id?: string;
+  listId?: number;
+}
+
+export enum ApiType {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  DELETE = "DELETE",
+}
+
+export interface FetchData {
+  data: Data | null;
+  isLoading: boolean;
+  error: boolean;
+  status: number;
+}
+
+export interface Data {
+  id: number;
 }
