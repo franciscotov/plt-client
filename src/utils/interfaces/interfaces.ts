@@ -143,8 +143,8 @@ export enum ApiType {
   DELETE = "DELETE",
 }
 
-export interface FetchData {
-  data: Data | null;
+export interface FetchData<T> {
+  data: T | null;
   isLoading: boolean;
   error: boolean;
   status: number;

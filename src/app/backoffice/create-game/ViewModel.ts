@@ -1,30 +1,20 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { createGame } from "@/app/services/gameService";
 import useAlert from "@/components/molecules/alert/AlertComponent";
 import { useRouter } from "next/navigation";
 import i18n from "@/i18n/i18n-es.json";
 import routes from "@/routes/routes";
 import {
-  DaysAttributes,
   GameAttributes,
   GridMeasuresProps,
-  PaginateDTO,
 } from "@/utils/interfaces/interfaces";
 import { formConst } from "@/constants";
-import { getDays } from "@/app/services/daysService";
-import { getTypes } from "@/app/services/gameTypeService";
-import { fetchDataCampus } from "@/app/services/fetchData";
+import { FetchDataCampus, FetchDataDays, FetchDataTypes } from "@/app/services/fetchData";
 
 const ViewModel = (watch: any) => {
   const { AlertComponent, openSnackbar } = useAlert();
   const { push } = useRouter();
-  const [dataCampus, setDataCampus] = useState<[] | null>(null);
-  const [dataDays, setDataDays] = useState<[] | null>(null);
-  const [dataTypes, setDataTypes] = useState<[] | null>(null);
-  const [loadingCampus, setLoadingCampus] = useState(true);
-  const [loadingDays, setLoadingDays] = useState(true);
-  const [loadingTypes, setLoadingTypes] = useState(true);
 
   const gridMeasures: GridMeasuresProps = { sm: 6, md: 6, xs: 12 };
 
@@ -48,56 +38,28 @@ const ViewModel = (watch: any) => {
   };
 
   /*
-   * get days data
+   * get campus data
    */
-  const fetchDataDays: PaginateDTO<DaysAttributes> | any = async () => {
-    const res: PaginateDTO<DaysAttributes> | any = await getDays(0, 10);
-    if (res?.status === 200) {
-      if (res.data) {
-        setLoadingDays(false);
-        const formatedRows = res.data.rows;
-        setDataDays(formatedRows);
-      } else {
-        setDataDays([]);
-      }
-    } else {
-      openSnackbar(i18n.errorTitle, i18n.errorMsgGetDataDays, "error");
-      setLoadingDays(false);
-      setDataDays([]);
-    }
-  };
+  const {
+    data: dataCampus,
+    isLoading: loadingCampus,
+  } = FetchDataCampus();
 
   /*
+   * get days data
+   */
+  const {
+    data: dataDays,
+    isLoading: loadingDays,
+  } = FetchDataDays();
+
+   /*
    * get types data
    */
-  const fetchDataTypes: PaginateDTO<DaysAttributes> | any = async () => {
-    const res: PaginateDTO<DaysAttributes> | any = await getTypes(0, 100);
-    if (res?.status === 200) {
-      if (res.data) {
-        setLoadingTypes(false);
-        const formatedRows = res.data.rows;
-        setDataTypes(formatedRows);
-      } else {
-        setDataTypes([]);
-      }
-    } else {
-      openSnackbar(i18n.errorTitle, i18n.errorMsgGetDataDays, "error");
-      setLoadingTypes(false);
-      setDataTypes([]);
-    }
-  };
-
-  useEffect(() => {
-    if (!dataCampus) {
-      fetchDataCampus(setDataCampus, setLoadingCampus, openSnackbar);
-    }
-    if (!dataDays) {
-      fetchDataDays();
-    }
-    if (!dataTypes) {
-      fetchDataTypes();
-    }
-  });
+  const {
+    data: dataTypes,
+    isLoading: loadingTypes,
+  } = FetchDataTypes();
 
   const manageWithValue = {
     [game.day]: true,

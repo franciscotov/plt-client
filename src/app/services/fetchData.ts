@@ -1,69 +1,108 @@
 import i18n from "@/i18n/i18n-es.json";
 import {
+  ApiType,
   CampusAttributes,
+  DaysAttributes,
+  FetchData,
+  GameTypeAttributes,
   ListAttributes,
   PaginateDTO,
 } from "@/utils/interfaces/interfaces";
-import { getCampus } from "./campusService";
 import { getListByCampusId } from "./listService";
+import useFetch from "../hooks";
 
-/*
- * get campus data
- */
-export const fetchDataCampus: PaginateDTO<CampusAttributes> | any = async (
-  setDataCampus: any,
-  setLoadingCampus: any,
-  openSnackbar: any
-) => {
-  const res: PaginateDTO<CampusAttributes> | any = await getCampus(0, 1000);
-  if (res?.status === 200) {
-    if (res.data) {
-      setLoadingCampus(false);
-      const formatedRows = res.data.rows.map((campus: CampusAttributes) => ({
-        ...campus,
-        label: campus.name,
-        value: campus.id,
-      }));
-      setDataCampus(formatedRows);
-    } else {
-      setDataCampus([]);
-    }
-  } else {
-    openSnackbar(i18n.errorTitle, i18n.errorMsgGetDataCampus, "error");
-    setLoadingCampus(false);
-    setDataCampus([]);
-  }
+const paths = {
+  campusList: "campus/list",
+  daysList: "days/list",
+  gameTypeList: "game-type/list",
+  listByCampusId: "list/list-by-campus-id",
 };
 
 /*
- * get list data
+ * get campus data, adapted to useFetch hook
  */
-export const fetchDataList: PaginateDTO<ListAttributes> | any = async (
-  setDataList: any,
-  setLoadingList: any,
-  openSnackbar: any,
-  campusId: number
+export const FetchDataCampus: PaginateDTO<CampusAttributes> | any = (
+  params: any = {}
 ) => {
-  const res: PaginateDTO<ListAttributes> | any = await getListByCampusId(
-    campusId,
-    0,
-    1000
-  );
-  if (res?.status === 200) {
-    if (res.data) {
-      setLoadingList(false);
-      const formatedRows = res.data.map((list: ListAttributes) => ({
-        ...list,
-        label: list.name,
-        value: list.id,
-      }));
-      setDataList(formatedRows);
-    } else {
-      setDataList([]);
-    }
-  } else {
-    openSnackbar(i18n.errorTitle, i18n.errorMsgGetDataList, "error");
-    setLoadingList(false);
-    setDataList([]);
+  const {
+    data,
+    isLoading,
+    error,
+    status,
+  }: FetchData<PaginateDTO<CampusAttributes>> = useFetch<
+    PaginateDTO<CampusAttributes>
+  >(paths.campusList, ApiType.GET, {}, params);
+
+  let formatedData = null;
+  if (status === 200 && data && !isLoading && !error) {
+    formatedData = data.rows.map((campus: CampusAttributes) => ({
+      ...campus,
+      label: campus.name,
+      value: campus.id,
+    }));
   }
+  return { data: formatedData, isLoading, error, status };
+};
+
+/*
+ * get days data, adapted to useFetch hook
+ */
+export const FetchDataDays: PaginateDTO<DaysAttributes> | any = (
+  params: any = {}
+) => {
+  const {
+    data,
+    isLoading,
+    error,
+    status,
+  }: FetchData<PaginateDTO<DaysAttributes>> = useFetch<
+    PaginateDTO<DaysAttributes>
+  >(paths.daysList, ApiType.GET, {}, params);
+
+  return { data: data?.rows, isLoading, error, status };
+};
+
+/*
+ * get game type data, adapted to useFetch hook
+ */
+export const FetchDataTypes: PaginateDTO<GameTypeAttributes> | any = (
+  params: any = {}
+) => {
+  const {
+    data,
+    isLoading,
+    error,
+    status,
+  }: FetchData<PaginateDTO<GameTypeAttributes>> = useFetch<
+    PaginateDTO<GameTypeAttributes>
+  >(paths.gameTypeList, ApiType.GET, {}, params);
+
+  return { data: data?.rows, isLoading, error, status };
+};
+
+/*
+ * get list, adapted to useFetch hook
+ */
+export const FetchDataList: PaginateDTO<ListAttributes> | any = (
+  params: any = {}
+) => {
+  params = params.campusId ? params : {};
+  const {
+    data,
+    isLoading,
+    error,
+    status,
+  }: FetchData<PaginateDTO<ListAttributes> | any> = useFetch<
+    PaginateDTO<ListAttributes>
+  >(paths.listByCampusId, ApiType.GET, {}, params);
+
+  let formatedData = null;
+  if (status === 200 && data && !isLoading && !error) {
+    formatedData = data.map((campus: ListAttributes) => ({
+      ...campus,
+      label: campus.name,
+      value: campus.id,
+    }));
+  }
+  return { data: formatedData, isLoading, error, status };
 };

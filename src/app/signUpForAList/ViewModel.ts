@@ -6,7 +6,10 @@ import i18n from "@/i18n/i18n-es.json";
 import routes from "@/routes/routes";
 import { setLogin } from "@/utils/utils";
 import { SelectAttributes, UserBase } from "@/utils/interfaces/interfaces";
-import { fetchDataCampus, fetchDataList } from "../services/fetchData";
+import {
+  FetchDataCampus,
+  FetchDataList,
+} from "../services/fetchData";
 import { signUpPlayerToList } from "../services/playerListService";
 import { formConst } from "@/constants";
 const { list } = formConst;
@@ -14,10 +17,6 @@ const { list } = formConst;
 const ViewModel = (watch: any) => {
   const { AlertComponent, openSnackbar } = useAlert();
   const { push } = useRouter();
-  const [dataCampus, setDataCampus] = useState<[] | null>(null);
-  const [loadingCampus, setLoadingCampus] = useState(true);
-  const [dataList, setDataList] = useState<[] | null>(null);
-  const [loadingList, setLoadingList] = useState(false);
   const campusSeleted: SelectAttributes = watch(list.campus);
 
   const handleData = (res: any) => {
@@ -43,21 +42,17 @@ const ViewModel = (watch: any) => {
     handleData(res);
   };
 
-  useEffect(() => {
-    fetchDataCampus(setDataCampus, setLoadingCampus, openSnackbar);
-  });
+  const {
+    data: dataCampus,
+    isLoading: loadingCampus,
+    error: errorCampus,
+    status: statusCampus,
+  } = FetchDataCampus();
 
-  useEffect(() => {
-    if (!dataList && campusSeleted) {
-      setLoadingList(true);
-      fetchDataList(
-        setDataList,
-        setLoadingList,
-        openSnackbar,
-        campusSeleted.value
-      );
-    }
-  }, [campusSeleted]);
+  const {
+    data: dataList,
+    isLoading: loadingList,
+  } = FetchDataList({ campusId: campusSeleted?.value });
 
   return {
     submitSignUpPlayerToList,

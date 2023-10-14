@@ -1,8 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { Autocomplete, CircularProgress, Grid, TextField } from "@mui/material";
+import {
+  Autocomplete,
+  AutocompleteRenderInputParams,
+  CircularProgress,
+  Grid,
+  TextField,
+} from "@mui/material";
 import { Control, Controller } from "react-hook-form";
-import CustomEndAdornament from "../EndAdornament";
 import i18n from "@/i18n/i18n-es.json";
 import { GridMeasuresProps } from "@/utils/interfaces/interfaces";
 
@@ -63,7 +68,7 @@ const Select = (props: SelectProps): JSX.Element => {
     );
   };
 
-  const { sm, xs, md}: GridMeasuresProps = gridMeasures
+  const { sm, xs, md }: GridMeasuresProps = gridMeasures;
 
   return (
     <Grid item xs={xs} md={md} sm={sm}>
@@ -77,7 +82,7 @@ const Select = (props: SelectProps): JSX.Element => {
           return (
             <Autocomplete
               placeholder={placeholder || i18n.commonLabel}
-              getOptionLabel={(option) => (option.label ? option.label : "")}
+              getOptionLabel={(option) => (option.label ? `${option.label} ${option.value}` : "")}
               inputValue={inputValue || value?.label || ""}
               onInputChange={(_e, newvalue) => {
                 setInputValue(newvalue);
@@ -85,17 +90,12 @@ const Select = (props: SelectProps): JSX.Element => {
               }}
               onClose={() => setInputValue("")}
               fullWidth={fullWidth}
-              renderInput={(params) => (
+              renderInput={(params: AutocompleteRenderInputParams) => (
                 <TextField
-                  {...params}
-                  required={required}
-                  InputLabelProps={{
-                    shrink: true,
-                    classes: {
-                      asterisk: classes.asterikColor.color,
-                      root: classes.rootLabel.color,
-                    },
-                  }}
+                  id={params.id}
+                  disabled={params.disabled}
+                  size={params.size}
+                  inputProps={params.inputProps}
                   label={label}
                   placeholder={placeholder}
                   variant={"outlined"}
@@ -103,6 +103,13 @@ const Select = (props: SelectProps): JSX.Element => {
                   helperText={error ? helperText : ""}
                   error={!!error}
                   fullWidth={fullWidth}
+                  InputLabelProps={{
+                    shrink: true,
+                    classes: {
+                      asterisk: classes.asterikColor.color,
+                      root: classes.rootLabel.color,
+                    },
+                  }}
                   InputProps={{
                     ...params.InputProps,
                     endAdornment: (
@@ -116,8 +123,7 @@ const Select = (props: SelectProps): JSX.Element => {
                   }}
                 />
               )}
-              onChange={(e, optionSelected) => {
-                // if (takeEvent) onChange(e);
+              onChange={(_e, optionSelected) => {
                 if (optionSelected) onChange(optionSelected);
               }}
               options={getOptions()}
