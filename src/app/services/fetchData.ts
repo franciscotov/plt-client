@@ -8,7 +8,6 @@ import {
   ListAttributes,
   PaginateDTO,
 } from "@/utils/interfaces/interfaces";
-import { getListByCampusId } from "./listService";
 import useFetch from "../hooks";
 
 const paths = {
@@ -36,7 +35,7 @@ export const FetchDataCampus: PaginateDTO<CampusAttributes> | any = (
   let formatedData = null;
   if (status === 200 && data && !isLoading && !error) {
     formatedData = data.rows.map((campus: CampusAttributes) => ({
-      ...campus,
+      // ...campus,
       label: campus.name,
       value: campus.id,
     }));

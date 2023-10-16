@@ -88,6 +88,7 @@ const Select = (props: SelectProps): JSX.Element => {
                 setInputValue(newvalue);
                 if (!newvalue) onChange(newvalue);
               }}
+              isOptionEqualToValue={getOptionSelected}
               onClose={() => setInputValue("")}
               fullWidth={fullWidth}
               renderInput={(params: AutocompleteRenderInputParams) => (

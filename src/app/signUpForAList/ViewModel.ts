@@ -6,10 +6,7 @@ import i18n from "@/i18n/i18n-es.json";
 import routes from "@/routes/routes";
 import { setLogin } from "@/utils/utils";
 import { SelectAttributes, UserBase } from "@/utils/interfaces/interfaces";
-import {
-  FetchDataCampus,
-  FetchDataList,
-} from "../services/fetchData";
+import { FetchDataCampus, FetchDataList } from "../services/fetchData";
 import { signUpPlayerToList } from "../services/playerListService";
 import { formConst } from "@/constants";
 const { list } = formConst;
@@ -23,14 +20,7 @@ const ViewModel = (watch: any) => {
     if (res?.status === 200) {
       openSnackbar(i18n.titleSuccessLogin, i18n.msgSuccessLogin, "success");
       setTimeout(() => {
-        const userdata = res.data;
-        // si es de tipo admin vamos al backoffice
-        setLogin(res.data);
-        if (userdata.role.id !== 1) {
-          push(routes.backoffice);
-        } else {
-          push(routes.signUpForAList);
-        }
+        push(routes.root);
       }, 500);
       return;
     }
@@ -42,17 +32,11 @@ const ViewModel = (watch: any) => {
     handleData(res);
   };
 
-  const {
-    data: dataCampus,
-    isLoading: loadingCampus,
-    error: errorCampus,
-    status: statusCampus,
-  } = FetchDataCampus();
+  const { data: dataCampus, isLoading: loadingCampus } = FetchDataCampus();
 
-  const {
-    data: dataList,
-    isLoading: loadingList,
-  } = FetchDataList({ campusId: campusSeleted?.value });
+  const { data: dataList, isLoading: loadingList } = FetchDataList({
+    campusId: campusSeleted?.value,
+  });
 
   return {
     submitSignUpPlayerToList,
