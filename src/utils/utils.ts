@@ -15,7 +15,7 @@ export const setLogin = (res: UserBase) => {
  * @return {string}
  */
 export function getToken() {
-  const userInfo = localStorage.getItem(storageKeys.userInfo);
+  const userInfo = localStorage?.getItem(storageKeys.userInfo);
   const session = JSON.parse(userInfo || "{}");
   return session?.token || null;
 }
@@ -39,7 +39,7 @@ export const validateSession = () => {
   const path = location.pathname;
   if (path === routes.login || path.includes(routes.changePassword)) return;
   if (path !== routes.login && !token) {
-    localStorage.clear();
+    localStorage?.clear();
     window.location.href = routes.login;
     return false;
   }
@@ -47,12 +47,12 @@ export const validateSession = () => {
     let decoded: any = jwt_decode(token);
     let now = new Date().getTime() / 1000;
     if (now > decoded.exp) {
-      localStorage.clear();
+      localStorage?.clear();
       window.location.href = routes.login;
       return;
     }
   } catch {
-    localStorage.clear();
+    localStorage?.clear();
     window.location.href = routes.login;
     return;
   }
