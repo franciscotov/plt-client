@@ -37,7 +37,7 @@ export default function RootLayout({
           src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_REACT_APP_API_KEY}&libraries=places`}
         ></Script>
       </head>
-      <body className={inter.className}>
+      <body className={inter.className} style={{ backgroundColor: "#F0F0F0" }}>
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
       </body>
     </html>

@@ -8,6 +8,7 @@ export const containerStyles: CSSProperties = {
   alignItems: "center",
   padding: "6rem",
   minHeight: "100vh",
+  backgroundColor: "#f0f0f0",
 };
 
 export const containerLoginStyles: CSSProperties = {
