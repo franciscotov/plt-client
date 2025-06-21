@@ -10,7 +10,8 @@
     "dev": "cross-env NODE_ENV=development env-cmd -f env/env.dev next dev",
     "build": "next build",
     "start": "env-cmd -f env/env.pro next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "install:personal": "npm_config_userconfig=./.npmrc npm install"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
