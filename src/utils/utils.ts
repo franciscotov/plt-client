@@ -7,7 +7,9 @@ export const storageKeys = {
 };
 
 export const setLogin = (res: UserBase) => {
-  localStorage.setItem("userInfo", JSON.stringify(res));
+  if (typeof window !== "undefined") {
+    localStorage?.setItem("userInfo", JSON.stringify(res));
+  }
 };
 
 /**
@@ -15,9 +17,12 @@ export const setLogin = (res: UserBase) => {
  * @return {string}
  */
 export function getToken() {
-  const userInfo = localStorage?.getItem(storageKeys.userInfo);
-  const session = JSON.parse(userInfo || "{}");
-  return session?.token || null;
+  if (typeof window !== "undefined") {
+    // localStorage?.setItem("userInfo", JSON.stringify(res));
+    const userInfo = localStorage?.getItem(storageKeys.userInfo);
+    const session = JSON.parse(userInfo || "{}");
+    return session?.token || null;
+  }
 }
 
 /**
@@ -25,9 +30,12 @@ export function getToken() {
  * @return {UserBase}
  */
 export function getUserInfo(): UserBase {
-  const userInfo = localStorage?.getItem(storageKeys.userInfo);
-  const session = JSON.parse(userInfo || "{}");
-  return session;
+  if (typeof window !== "undefined") {
+    const userInfo = localStorage?.getItem(storageKeys.userInfo);
+    const session = JSON.parse(userInfo || "{}");
+    return session;
+  }
+  return {} as UserBase;
 }
 
 /**
